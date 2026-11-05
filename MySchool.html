@@ -459,6 +459,8 @@ html:not(.authed) .app,html:not(.authed) .modal,html:not(.authed) .toast{display
 #gate .g-main input{width:100%;height:46px;margin:6px 0;padding:0 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2);color:var(--ink);font-size:14px;font-weight:600;outline:none}
 #gate .g-main input:focus{border-color:var(--blue)}
 #gate .g-row{display:flex;gap:10px}
+#gate .g-lbl{display:block;margin:10px 2px 0;font-weight:800;font-size:13px;color:var(--ink)}
+#gate .g-lbl small{display:block;margin-top:2px;color:var(--muted);font-weight:600;font-size:12px}
 #gate .g-row input{min-width:0}
 #gate .g-google{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;height:50px;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);font-weight:800;font-size:15px}
 #gate .g-google:hover{border-color:var(--blue)}
@@ -569,7 +571,9 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
           <form id="fInfo" novalidate>
             <div class="g-row"><input type="text" id="uName" data-gph="name" data-req autocomplete="given-name" maxlength="30"><input type="text" id="uSur" data-gph="surname" data-req autocomplete="family-name" maxlength="30"></div>
             <input type="text" id="uSchool" data-gph="school" data-req maxlength="60">
-            <div class="g-row"><input type="text" id="uKlass" data-gph="klass" data-req maxlength="10"><input type="date" id="uDob" data-req min="1980-01-01"></div>
+            <input type="text" id="uKlass" data-gph="klass" data-req maxlength="10">
+            <label class="g-lbl" for="uDob"><span data-g="dob_t"></span><small data-g="dob_h"></small></label>
+            <input type="date" id="uDob" data-req min="1980-01-01">
             <input type="tel" id="uPhone" data-gph="phone" data-req autocomplete="tel" maxlength="20">
             <button type="submit" class="g-primary" data-g="enter"></button>
             <p class="g-msg" id="gMsg2" role="alert"></p>
@@ -929,10 +933,10 @@ window.fmtPhone=function(d){ return '+998 '+d.slice(0,2)+' '+d.slice(2,5)+' '+d.
   var LANGS=[['uz','O‘zbekcha','UZ'],['ru','Русский','RU'],['en','English','EN'],['kk','Қазақша','KZ']];
   var lang='uz'; try{ var sl=localStorage.getItem('myschool-lang'); if(LANGS.some(function(l){return l[0]===sl})) lang=sl; }catch(e){}
   var G={
-    uz:{welcome_t:'Xush kelibsiz!',welcome_p:"MySchool'ga Google hisobingiz orqali kiring. Hisobingizni tanlang, shaxsiy ma'lumotlarni to'ldiring va maktab hayotiga qo'shiling.",start_t:"Kirish va ro'yxatdan o'tish",start_p:'Davom etish uchun Google hisobingizni tanlang.',google:'Google orqali davom etish',need_google:'Saytga faqat Google hisobi orqali kirish mumkin.',info_t:"Shaxsiy ma'lumotlar",info_p:"Ro'yxatdan o'tishni yakunlash uchun ma'lumotlaringizni to'ldiring.",'switch':'Boshqa hisob',enter:'Saytga kirish',name:'Ism',surname:'Familiya',school:'Maktab',klass:'Sinf (9-A)',dob_l:"Tug'ilgan sana",phone:'Telefon raqami',fill:"Barcha (*) maydonlarni to'ldiring",baddob:"Tug'ilgan sanani to'g'ri kiriting",badphone:"Telefon raqami noto'g'ri",net:"Tarmoq xatosi. Qayta urinib ko'ring",domain:"Bu sayt manzili Firebase'da ruxsat etilmagan (Authorized domains)",err:"Kirib bo'lmadi. Qayta urinib ko'ring",demo:"Demo rejim: Firebase hali sozlanmagan, hisob tanlash taqlid qilinadi va faqat shu brauzerda ishlaydi.",pick_t:'Hisobni tanlang',pick_other:'Boshqa Google hisob (email)',next:'Davom etish',cancel:'Bekor qilish',bademail:"Email noto'g'ri"},
-    ru:{welcome_t:'Добро пожаловать!',welcome_p:'Войдите в MySchool через аккаунт Google. Выберите аккаунт, заполните личные данные и присоединяйтесь к школьной жизни.',start_t:'Вход и регистрация',start_p:'Выберите аккаунт Google, чтобы продолжить.',google:'Продолжить с Google',need_google:'Войти на сайт можно только через аккаунт Google.',info_t:'Личные данные',info_p:'Заполните данные, чтобы завершить регистрацию.','switch':'Другой аккаунт',enter:'Войти на сайт',name:'Имя',surname:'Фамилия',school:'Школа',klass:'Класс (9-А)',dob_l:'Дата рождения',phone:'Номер телефона',fill:'Заполните все поля (*)',baddob:'Введите корректную дату рождения',badphone:'Неверный номер телефона',net:'Ошибка сети. Попробуйте ещё раз',domain:'Адрес сайта не добавлен в Authorized domains Firebase',err:'Не удалось войти. Попробуйте ещё раз',demo:'Демо-режим: Firebase ещё не настроен, выбор аккаунта имитируется и работает только в этом браузере.',pick_t:'Выберите аккаунт',pick_other:'Другой аккаунт Google (email)',next:'Далее',cancel:'Отмена',bademail:'Неверный email'},
-    en:{welcome_t:'Welcome!',welcome_p:'Sign in to MySchool with your Google account. Choose an account, fill in your personal details and join school life.',start_t:'Sign in or register',start_p:'Choose your Google account to continue.',google:'Continue with Google',need_google:'You can only enter the site with a Google account.',info_t:'Personal information',info_p:'Fill in your details to finish registration.','switch':'Use another account',enter:'Enter the site',name:'First name',surname:'Surname',school:'School',klass:'Class (9-A)',dob_l:'Date of birth',phone:'Phone number',fill:'Please fill in all (*) fields',baddob:'Enter a valid date of birth',badphone:'Invalid phone number',net:'Network error. Please try again',domain:'This site address is not in Firebase Authorized domains',err:'Could not sign in. Please try again',demo:'Demo mode: Firebase is not set up yet, account choosing is simulated and only works in this browser.',pick_t:'Choose an account',pick_other:'Another Google account (email)',next:'Next',cancel:'Cancel',bademail:'Invalid email'},
-    kk:{welcome_t:'Қош келдіңіз!',welcome_p:'MySchool-ға Google аккаунты арқылы кіріңіз. Аккаунтты таңдап, жеке деректерді толтырыңыз да, мектеп өміріне қосылыңыз.',start_t:'Кіру және тіркелу',start_p:'Жалғастыру үшін Google аккаунтын таңдаңыз.',google:'Google арқылы жалғастыру',need_google:'Сайтқа тек Google аккаунты арқылы кіруге болады.',info_t:'Жеке деректер',info_p:'Тіркеуді аяқтау үшін деректеріңізді толтырыңыз.','switch':'Басқа аккаунт',enter:'Сайтқа кіру',name:'Аты',surname:'Тегі',school:'Мектеп',klass:'Сынып (9-А)',dob_l:'Туған күні',phone:'Телефон нөмірі',fill:'Барлық (*) өрістерді толтырыңыз',baddob:'Туған күнді дұрыс енгізіңіз',badphone:'Телефон нөмірі қате',net:'Желі қатесі. Қайталап көріңіз',domain:'Сайт мекенжайы Firebase Authorized domains тізімінде жоқ',err:'Кіру мүмкін болмады. Қайталап көріңіз',demo:'Демо режим: Firebase әлі бапталмаған, аккаунт таңдау имитацияланады және тек осы браузерде жұмыс істейді.',pick_t:'Аккаунтты таңдаңыз',pick_other:'Басқа Google аккаунты (email)',next:'Әрі қарай',cancel:'Бас тарту',bademail:'Email қате'}
+    uz:{welcome_t:'Xush kelibsiz!',welcome_p:"MySchool'ga Google hisobingiz orqali kiring. Hisobingizni tanlang, shaxsiy ma'lumotlarni to'ldiring va maktab hayotiga qo'shiling.",start_t:"Kirish va ro'yxatdan o'tish",start_p:'Davom etish uchun Google hisobingizni tanlang.',google:'Google orqali davom etish',need_google:'Saytga faqat Google hisobi orqali kirish mumkin.',info_t:"Shaxsiy ma'lumotlar",info_p:"Ro'yxatdan o'tishni yakunlash uchun ma'lumotlaringizni to'ldiring.",'switch':'Boshqa hisob',enter:'Saytga kirish',name:'Ism',surname:'Familiya',school:'Maktab',klass:'Sinf (9-A)',dob_l:"Tug'ilgan sana",dob_t:"Tug'ilgan sana *",dob_h:"Kun, oy va yilni tanlang (masalan: 12.03.2010)",phone:'Telefon raqami',fill:"Barcha (*) maydonlarni to'ldiring",baddob:"Tug'ilgan sanani to'g'ri kiriting",badphone:"Telefon raqami noto'g'ri",net:"Tarmoq xatosi. Qayta urinib ko'ring",domain:"Bu sayt manzili Firebase'da ruxsat etilmagan (Authorized domains)",err:"Kirib bo'lmadi. Qayta urinib ko'ring",demo:"Demo rejim: Firebase hali sozlanmagan, hisob tanlash taqlid qilinadi va faqat shu brauzerda ishlaydi.",pick_t:'Hisobni tanlang',pick_other:'Boshqa Google hisob (email)',next:'Davom etish',cancel:'Bekor qilish',bademail:"Email noto'g'ri"},
+    ru:{welcome_t:'Добро пожаловать!',welcome_p:'Войдите в MySchool через аккаунт Google. Выберите аккаунт, заполните личные данные и присоединяйтесь к школьной жизни.',start_t:'Вход и регистрация',start_p:'Выберите аккаунт Google, чтобы продолжить.',google:'Продолжить с Google',need_google:'Войти на сайт можно только через аккаунт Google.',info_t:'Личные данные',info_p:'Заполните данные, чтобы завершить регистрацию.','switch':'Другой аккаунт',enter:'Войти на сайт',name:'Имя',surname:'Фамилия',school:'Школа',klass:'Класс (9-A)',dob_l:'Дата рождения',dob_t:'Дата рождения *',dob_h:'Выберите день, месяц и год (например: 12.03.2010)',phone:'Номер телефона',fill:'Заполните все поля (*)',baddob:'Введите корректную дату рождения',badphone:'Неверный номер телефона',net:'Ошибка сети. Попробуйте ещё раз',domain:'Адрес сайта не добавлен в Authorized domains Firebase',err:'Не удалось войти. Попробуйте ещё раз',demo:'Демо-режим: Firebase ещё не настроен, выбор аккаунта имитируется и работает только в этом браузере.',pick_t:'Выберите аккаунт',pick_other:'Другой аккаунт Google (email)',next:'Далее',cancel:'Отмена',bademail:'Неверный email'},
+    en:{welcome_t:'Welcome!',welcome_p:'Sign in to MySchool with your Google account. Choose an account, fill in your personal details and join school life.',start_t:'Sign in or register',start_p:'Choose your Google account to continue.',google:'Continue with Google',need_google:'You can only enter the site with a Google account.',info_t:'Personal information',info_p:'Fill in your details to finish registration.','switch':'Use another account',enter:'Enter the site',name:'First name',surname:'Surname',school:'School',klass:'Class (9-A)',dob_l:'Date of birth',dob_t:'Date of birth *',dob_h:'Pick day, month and year (e.g. 12.03.2010)',phone:'Phone number',fill:'Please fill in all (*) fields',baddob:'Enter a valid date of birth',badphone:'Invalid phone number',net:'Network error. Please try again',domain:'This site address is not in Firebase Authorized domains',err:'Could not sign in. Please try again',demo:'Demo mode: Firebase is not set up yet, account choosing is simulated and only works in this browser.',pick_t:'Choose an account',pick_other:'Another Google account (email)',next:'Next',cancel:'Cancel',bademail:'Invalid email'},
+    kk:{welcome_t:'Қош келдіңіз!',welcome_p:'MySchool-ға Google аккаунтыңыз арқылы кіріңіз. Аккаунтты таңдаңыз, жеке деректеріңізді толтырып, мектеп өміріне қосылыңыз.',start_t:'Кіру және тіркелу',start_p:'Жалғастыру үшін Google аккаунтын таңдаңыз.',google:'Google арқылы жалғастыру',need_google:'Сайтқа тек Google аккаунты арқылы кіруге болады.',info_t:'Жеке деректер',info_p:'Тіркеуді аяқтау үшін деректеріңізді толтырыңыз.','switch':'Басқа аккаунт',enter:'Сайтқа кіру',name:'Аты',surname:'Тегі',school:'Мектеп',klass:'Сынып (9-A)',dob_l:'Туған күні',dob_t:'Туған күні *',dob_h:'Күнін, айын және жылын таңдаңыз (мысалы: 12.03.2010)',phone:'Телефон нөмірі',fill:'Барлық (*) өрістерді толтырыңыз',baddob:'Туған күнді дұрыс енгізіңіз',badphone:'Телефон нөмірі қате',net:'Желі қатесі. Қайталап көріңіз',domain:'Бұл сайт мекенжайы Firebase-тің рұқсат етілген домендер (Authorized domains) тізіміне қосылмаған',err:'Кіру мүмкін болмады. Қайталап көріңіз',demo:'Демо режим: Firebase әлі бапталмаған, аккаунт таңдау тек көрсетілім үшін және тек осы браузерде жұмыс істейді.',pick_t:'Аккаунтты таңдаңыз',pick_other:'Басқа Google аккаунты (email)',next:'Әрі қарай',cancel:'Бас тарту',bademail:'Email қате'}
   };
   var S=G.uz, gate=$('#gate'), cur=null;
   function esc(t){return String(t).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
@@ -942,7 +946,7 @@ window.fmtPhone=function(d){ return '+998 '+d.slice(0,2)+' '+d.slice(2,5)+' '+d.
     S=G[lang]||G.uz;
     $$('[data-g]').forEach(function(el){ el.textContent=S[el.getAttribute('data-g')]; });
     $$('[data-gph]').forEach(function(el){ el.placeholder=S[el.getAttribute('data-gph')]+(el.hasAttribute('data-req')?' *':''); });
-    $('#uDob').setAttribute('aria-label',S.dob_l);
+    $('#uDob').setAttribute('aria-label',S.dob_l); try{ $('#uDob').max=new Date().toISOString().slice(0,10); }catch(e){}
     var c=LANGS.filter(function(l){return l[0]===lang})[0];
     $('#gLangFlag').innerHTML=FL[lang]||''; $('#gLangCode').textContent=c[2];
     $('#gLangMenu').innerHTML=LANGS.map(function(x){ return '<li><button type="button" data-gl="'+x[0]+'"'+(x[0]===lang?' aria-current="true"':'')+'>'+(FL[x[0]]||'')+'<span>'+x[1]+'</span></button></li>'; }).join('');
@@ -986,7 +990,7 @@ window.fmtPhone=function(d){ return '+998 '+d.slice(0,2)+' '+d.slice(2,5)+' '+d.
     if(!edit) r.lastLogin=Date.now(); if(fresh) r.ts=Date.now();
     if(demo){ try{ var m=JSON.parse(localStorage.getItem('myschool-users'))||{}; m[u.uid]=Object.assign(m[u.uid]||{},r); localStorage.setItem('myschool-users',JSON.stringify(m)); }catch(e){} return Promise.resolve(); }
     if(!DBU||!fb||!fb.currentUser) return Promise.resolve();
-    return fb.currentUser.getIdToken().then(function(t){ return fetch(DBU+'/users/'+encodeURIComponent(u.uid)+'.json?auth='+t,{method:'PATCH',body:JSON.stringify(r)}); }).catch(function(){});
+    return fb.currentUser.getIdToken().then(function(t){ return fetch(DBU+'/users/'+encodeURIComponent(u.uid)+'.json?auth='+t,{method:'PATCH',body:JSON.stringify(r)}).then(function(x){ if(!x.ok) console.warn('MySchool: user not saved (HTTP '+x.status+'). Check Firebase Realtime Database rules.'); }); }).catch(function(e){ console.warn('MySchool: user save failed',e); });
   }
   function remoteGet(u){
     if(demo||!DBU||!fb||!fb.currentUser) return Promise.resolve(null);
@@ -997,6 +1001,7 @@ window.fmtPhone=function(d){ return '+998 '+d.slice(0,2)+' '+d.slice(2,5)+' '+d.
     saveUser(u,p,fresh,false).then(go,go); setTimeout(go,2500);
   }
   window.__msSyncUser=function(p){ if(cur) saveUser(cur,p,false,true); };
+  window.__msGetToken=function(){ return (fb&&fb.currentUser)?fb.currentUser.getIdToken(true).catch(function(){return '';}):Promise.resolve(''); };
   function toInfo(u){ fillInfo(u); root.classList.remove('authed'); gate.hidden=false; showStep('info'); }
   function onUser(u){
     if(!u){ cur=null; root.classList.remove('authed'); gate.hidden=false; showStep('start'); return; }
@@ -1147,7 +1152,7 @@ Ijod|Творчество|Creativity|Шығармашылық
 Loyiha|Проект|Project|Жоба
 Kurs|Курс|Course|Курс
 Klub|Клуб|Club|Клуб
-Maktab hayotidagi eng so'nggi voqealar va muhim yangiliklar bilan tanishing.|Узнайте о последних событиях и важных новостях школьной жизни.|Catch up on the latest events and important news from school life.|Мектеп өміріндегі соңғы оқиғалар мен маңызды жаңалықтармен танысыңыз.
+Maktab hayotidagi eng so'nggi voqealar va muhim yangiliklar bilan tanishing.|Узнайте о последних событиях и важных новостях школьной жизни.|Catch up on the latest events and important news from school life.|Мектеп өміріндегі соңғы оқиғалармен және маңызды жаңалықтармен танысыңыз.
 Yangiliklarni qidirish|Поиск новостей|Search news|Жаңалықтарды іздеу
 Yangiliklarni qidirish...|Поиск новостей...|Search news...|Жаңалықтарды іздеу...
 Hozircha yangiliklar yo'q.|Новостей пока нет.|No news yet.|Әзірге жаңалықтар жоқ.
@@ -1160,7 +1165,7 @@ Oy bo'yicha|По месяцу|By month|Ай бойынша
 Barcha sana|Все даты|All dates|Барлық күндер
 Bu oyda bellashuvlar yo'q.|В этом месяце соревнований нет.|No competitions this month.|Бұл айда жарыстар жоқ.
 Hozircha bellashuvlar yo'q.|Соревнований пока нет.|No competitions yet.|Әзірге жарыстар жоқ.
-Maktabdagi loyihalar, kurslar va klublar. O'zingga yoqqanini tanla va qo'shil.|Школьные проекты, курсы и клубы. Выбери по душе и присоединяйся.|School projects, courses and clubs. Pick what you like and join in.|Мектептегі жобалар, курстар және клубтар. Ұнағанын таңда да, қосыл.
+Maktabdagi loyihalar, kurslar va klublar. O'zingga yoqqanini tanla va qo'shil.|Школьные проекты, курсы и клубы. Выбери по душе и присоединяйся.|School projects, courses and clubs. Pick what you like and join in.|Мектептегі жобалар, курстар және клубтар. Өзіңе ұнағанын таңда да, қосыл.
 Barchasi|Все|All|Барлығы
 Loyihalar|Проекты|Projects|Жобалар
 Kurslar|Курсы|Courses|Курстар
@@ -1170,7 +1175,7 @@ Ariza topshirish|Подать заявку|Apply|Өтінім беру
 Kutilmoqda|Ожидает|Pending|Күтілуде
 Tasdiqlandi|Одобрено|Approved|Бекітілді
 Rad etildi|Отклонено|Rejected|Қабылданбады
-O'quvchilar va sinflar o'rtasidagi natijalarni kuzating, o'z o'rningizni bilib oling.|Следите за результатами учеников и классов и узнайте своё место.|Follow results of students and classes and see where you stand.|Оқушылар мен сыныптар нәтижесін қадағалап, өз орныңызды біліңіз.
+O'quvchilar va sinflar o'rtasidagi natijalarni kuzating, o'z o'rningizni bilib oling.|Следите за результатами учеников и классов и узнайте своё место.|Follow results of students and classes and see where you stand.|Оқушылар мен сыныптардың нәтижелерін қадағалап, өз орныңызды біліңіз.
 O'quvchilar o'rtasida|Среди учеников|Among students|Оқушылар арасында
 Sinflar o'rtasida|Среди классов|Among classes|Сыныптар арасында
 Davr|Период|Period|Кезең
@@ -1191,7 +1196,7 @@ Sinfda|В классе|In class|Сыныпта
 Maktabda|В школе|In school|Мектепте
 O'quvchi|Ученик|Student|Оқушы
 O'quvchilar soni|Число учеников|Students|Оқушылар саны
-O'z natijangizni ko'rish uchun “Mening profilim” bo'limidagi ism va sinf ro'yxatdagi bilan bir xil bo'lsin.|Чтобы увидеть свой результат, имя и класс в «Моём профиле» должны совпадать со списком.|To see your result, the name and class in “My profile” must match the list.|Нәтижеңізді көру үшін «Менің профилім» бөліміндегі аты-жөні мен сынып тізімдегімен бірдей болуы керек.
+O'z natijangizni ko'rish uchun “Mening profilim” bo'limidagi ism va sinf ro'yxatdagi bilan bir xil bo'lsin.|Чтобы увидеть свой результат, имя и класс в «Моём профиле» должны совпадать со списком.|To see your result, the name and class in “My profile” must match the list.|Нәтижеңізді көру үшін «Менің профилім» бөліміндегі аты-жөніңіз бен сыныбыңыз тізімдегідей болуы керек.
 Hozircha o'quvchilar qo'shilmagan.|Учеников пока нет.|No students added yet.|Әзірге оқушылар қосылмаған.
 Hozircha sinflar yo'q.|Классов пока нет.|No classes yet.|Әзірге сыныптар жоқ.
 Sizni qiziqtirgan savollarga javob toping.|Найдите ответы на интересующие вас вопросы.|Find answers to the questions you care about.|Сізді қызықтыратын сұрақтарға жауап табыңыз.
@@ -1217,7 +1222,7 @@ Telefon|Телефон|Phone|Телефон
 Izoh (ixtiyoriy)|Комментарий (необязательно)|Comment (optional)|Түсініктеме (міндетті емес)
 Yuborish|Отправить|Submit|Жіберу
 Ariza yuborildi. Admin tasdiqlashini kuting.|Заявка отправлена. Ожидайте решения администратора.|Application sent. Wait for the admin's approval.|Өтінім жіберілді. Әкімшінің бекітуін күтіңіз.
-Ism, sinf va telefonni to'g'ri yozing|Правильно введите имя, класс и телефон|Enter your name, class and phone correctly|Аты-жөніңізді, сыныбыңызды және телефонды дұрыс жазыңыз
+Ism, sinf va telefonni to'g'ri yozing|Правильно введите имя, класс и телефон|Enter your name, class and phone correctly|Аты-жөніңізді, сыныбыңызды және телефон нөміріңізді дұрыс жазыңыз
 Yuborib bo'lmadi. Keyinroq urinib ko'ring.|Не удалось отправить. Попробуйте позже.|Could not send. Please try again later.|Жіберу мүмкін болмады. Кейінірек қайталап көріңіз.
 Ma'lumotlar saqlandi|Данные сохранены|Details saved|Деректер сақталды
 Bildirishnomalar|Уведомления|Notifications|Хабарландырулар
@@ -1240,22 +1245,22 @@ sentabr|Сентябрь|September|Қыркүйек
 oktabr|Октябрь|October|Қазан
 noyabr|Ноябрь|November|Қараша
 dekabr|Декабрь|December|Желтоқсан
-Fotosuratni o'zgartirish|Изменить фото|Change photo|Фотоны өзгерту
+Fotosuratni o'zgartirish|Изменить фото|Change photo|Суретті өзгерту
 Olib tashlash|Убрать|Remove|Алып тастау
 Telefon raqami|Номер телефона|Phone number|Телефон нөмірі
 Telefon raqami noto'g'ri|Неверный номер телефона|Invalid phone number|Телефон нөмірі қате
 Tug'ilgan sanani to'g'ri kiriting|Введите корректную дату рождения|Enter a valid date of birth|Туған күнді дұрыс енгізіңіз
 Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое. Выберите меньше.|The photo is too large. Pick a smaller one.|Сурет тым үлкен. Кішірек сурет таңдаңыз.`.split('\n').forEach(function(r){ var p=r.split('|'); if(p.length===4) D[p[0].trim()]={ru:p[1].trim(),en:p[2].trim(),kk:p[3].trim()}; });
-  `Какова основная цель программы MySchool?|Основная цель MySchool — стимулировать учеников к активному участию в конкурсах и соревнованиях, расширять знания и развивать навыки.|What is the main goal of MySchool?|MySchool's main goal is to encourage students to take an active part in contests and competitions, broaden their knowledge and develop their skills.|MySchool бағдарламасының басты мақсаты қандай?|MySchool-дың басты мақсаты — оқушыларды түрлі байқау мен жарыстарға белсене қатысуға ынталандыру, білімін кеңейтіп, дағдыларын дамытуға көмектесу.
-Как награждаются победители соревнований?|Каждый участник команды соревнуется с товарищами, места распределяются по индивидуальным результатам, и награда зависит от места. Кроме того, классы и ученики, набравшие больше всего баллов, получают кубки.|How are competition winners rewarded?|Each team member competes with teammates and places are decided by individual results, with rewards given accordingly. Classes and students with the most points also receive cups.|Жарыс жеңімпаздары қалай марапатталады?|Әр команда мүшесі жолдастарымен жарысады, жеке нәтижесіне қарай орын алып, соған сай марапатталады. Сонымен қатар ең көп балл жинаған сыныптар мен оқушылар кубокпен марапатталады.
+  `Какова основная цель программы MySchool?|Основная цель MySchool — стимулировать учеников к активному участию в конкурсах и соревнованиях, расширять знания и развивать навыки.|What is the main goal of MySchool?|MySchool's main goal is to encourage students to take an active part in contests and competitions, broaden their knowledge and develop their skills.|MySchool бағдарламасының басты мақсаты қандай?|MySchool-дың басты мақсаты — оқушыларды түрлі байқаулар мен жарыстарға белсене қатысуға ынталандыру, олардың білімін кеңейтіп, дағдыларын дамытуға көмектесу.
+Как награждаются победители соревнований?|Каждый участник команды соревнуется с товарищами, места распределяются по индивидуальным результатам, и награда зависит от места. Кроме того, классы и ученики, набравшие больше всего баллов, получают кубки.|How are competition winners rewarded?|Each team member competes with teammates and places are decided by individual results, with rewards given accordingly. Classes and students with the most points also receive cups.|Жарыс жеңімпаздары қалай марапатталады?|Әр команда мүшесі командаластарымен жарысады, жеке нәтижесіне қарай орын иеленіп, соған сай марапатталады. Сонымен қатар ең көп балл жинаған сыныптар мен оқушылар кубоктармен марапатталады.
 Кто может участвовать в соревнованиях?|Ученики школы могут участвовать в объявленных конкурсах и соревнованиях в соответствии с установленными требованиями.|Who can take part in competitions?|School students can take part in announced contests and competitions in line with the set requirements.|Жарыстарға кімдер қатыса алады?|Мектеп оқушылары жарияланған байқаулар мен жарыстарға белгіленген талаптарға сай қатыса алады.
 Как узнать о новых соревнованиях?|В разделе «Предстоящие соревнования» можно ознакомиться с ближайшими соревнованиями, их датами и условиями участия.|How do I find out about new competitions?|The “Upcoming competitions” section lists upcoming competitions, their dates and entry conditions.|Жаңа жарыстар туралы қалай білемін?|«Алдағы жарыстар» бөлімінде жақындап келе жатқан жарыстармен, олардың күндерімен және қатысу шарттарымен танысуға болады.
 Как рассчитывается рейтинг классов?|Рейтинг классов формируется по баллам, набранным в соревнованиях. Ученики и классы могут следить за своими результатами и местами в рейтинге.|How is the class ranking calculated?|The class ranking is based on points earned in competitions. Students and classes can follow their results and positions.|Сыныптар рейтингі қалай есептеледі?|Сыныптар рейтингі жарыстарда жиналған баллдар негізінде қалыптасады. Оқушылар мен сыныптар өз нәтижелері мен рейтингтегі орындарын бақылай алады.
-Какая польза от участия в соревнованиях?|Соревнования помогают получать новые знания, развивать логическое мышление, проверять способности и укреплять навыки командной работы.|What are the benefits of taking part?|Competitions help students gain new knowledge, develop logical thinking, test their abilities and build teamwork skills.|Жарыстарға қатысудың қандай пайдасы бар?|Жарыстар оқушыларға жаңа білім алуға, логикалық ойлауды дамытуға, қабілетін сынауға және топта жұмыс істеу дағдысын арттыруға мүмкіндік береді.
-В каких направлениях проводятся соревнования?|Соревнования могут проходить в виде предметных олимпиад, состязаний знаний, творческих конкурсов и др. Список смотрите в соответствующем разделе.|In which areas are competitions held?|Competitions can include subject olympiads, knowledge contests, creative contests and more. See the relevant section for the list.|Жарыстар қандай бағыттарда өтеді?|Жарыстар пән олимпиадалары, білім сайыстары, шығармашылық байқаулар және басқа бағыттарда өтуі мүмкін. Тізімін тиісті бөлімнен қараңыз.
+Какая польза от участия в соревнованиях?|Соревнования помогают получать новые знания, развивать логическое мышление, проверять способности и укреплять навыки командной работы.|What are the benefits of taking part?|Competitions help students gain new knowledge, develop logical thinking, test their abilities and build teamwork skills.|Жарыстарға қатысудың қандай пайдасы бар?|Жарыстар оқушыларға жаңа білім алуға, логикалық ойлауды дамытуға, қабілетін сынап көруге және топпен жұмыс істеу дағдыларын жетілдіруге мүмкіндік береді.
+В каких направлениях проводятся соревнования?|Соревнования могут проходить в виде предметных олимпиад, состязаний знаний, творческих конкурсов и др. Список смотрите в соответствующем разделе.|In which areas are competitions held?|Competitions can include subject olympiads, knowledge contests, creative contests and more. See the relevant section for the list.|Жарыстар қандай бағыттарда өтеді?|Жарыстар пән олимпиадалары, білім сайыстары, шығармашылық байқаулар және өзге де бағыттарда өтуі мүмкін. Тізімін тиісті бөлімнен қараңыз.
 Где посмотреть свои результаты?|В разделе «Мой профиль» можно увидеть личные данные, класс и имеющиеся на платформе результаты.|Where can I see my results?|In the “My profile” section you can see your details, class and the results available on the platform.|Өз нәтижелерімді қайдан көре аламын?|«Менің профилім» бөлімінде жеке деректеріңізді, сыныбыңызды және платформадағы нәтижелеріңізді көре аласыз.
-Как участники команды соревнуются между собой?|Каждый участник соревнуется с товарищами по команде. Индивидуальные результаты и занятые места определяют его достижения в соревновании.|How do team members compete with each other?|Each member competes with teammates. Individual results and places determine their achievements in the competition.|Команда мүшелері өзара қалай жарысады?|Әр команда мүшесі жолдастарымен жарысады. Қатысушылардың жеке нәтижелері мен алған орындары олардың жетістіктерін анықтайды.
-Как набираются баллы?|Ученики получают баллы за результаты в соревнованиях. Баллы формируют личный рейтинг и рейтинг классов. Ученики и классы с лучшими результатами награждаются кубками.|How are points earned?|Students earn points for their competition results. Points shape personal and class rankings. Top students and classes receive cups.|Баллдар қалай жиналады?|Оқушылар жарыстардағы нәтижесіне қарай балл жинайды. Жиналған баллдар жеке және сыныптар рейтингін қалыптастырады. Ең жоғары нәтиже көрсеткен оқушылар мен сыныптар кубокпен марапатталады.`.split('\n').forEach(function(r,i){ var p=r.split('|'); if(p.length===6) FT[i]={ru:[p[0],p[1]],en:[p[2],p[3]],kk:[p[4],p[5]]}; });
+Как участники команды соревнуются между собой?|Каждый участник соревнуется с товарищами по команде. Индивидуальные результаты и занятые места определяют его достижения в соревновании.|How do team members compete with each other?|Each member competes with teammates. Individual results and places determine their achievements in the competition.|Команда мүшелері өзара қалай жарысады?|Әр команда мүшесі командаластарымен жарысады. Қатысушылардың жеке нәтижелері мен иеленген орындары олардың жетістіктерін анықтайды.
+Как набираются баллы?|Ученики получают баллы за результаты в соревнованиях. Баллы формируют личный рейтинг и рейтинг классов. Ученики и классы с лучшими результатами награждаются кубками.|How are points earned?|Students earn points for their competition results. Points shape personal and class rankings. Top students and classes receive cups.|Баллдар қалай жиналады?|Оқушылар жарыстардағы нәтижесіне қарай балл жинайды. Жиналған баллдар жеке рейтингті және сыныптар рейтингін қалыптастырады. Ең жоғары нәтиже көрсеткен оқушылар мен сыныптар кубоктармен марапатталады.`.split('\n').forEach(function(r,i){ var p=r.split('|'); if(p.length===6) FT[i]={ru:[p[0],p[1]],en:[p[2],p[3]],kk:[p[4],p[5]]}; });
   function tr(x){ var d=D[x]; return (lang!=='uz'&&d&&d[lang])||x; }
   function mName(m){ var v=tr(m); return v.charAt(0).toUpperCase()+v.slice(1); }
   function gradeLbl(g){ return lang==='ru'?g+' \u043a\u043b\u0430\u0441\u0441\u044b':lang==='en'?'Grade '+g:lang==='kk'?g+'-\u0441\u044b\u043d\u044b\u043f\u0442\u0430\u0440':g+'-sinflar'; }
@@ -1944,6 +1949,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   function lsGet(k){ try{ return JSON.parse(localStorage.getItem(k))||{}; }catch(e){ return {}; } }
   function lsSet(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
   function okj(r){ if(!r.ok) throw new Error('http'); return r.json(); }
+  function ensureToken(){ return (window.__msGetToken?window.__msGetToken():Promise.resolve('')).then(function(t){ if(t) token=t; return token; }); }
   var DB={
     create:function(a){
       if(!FB.url){ var m=lsGet('myschool-apps'); m[a.id]=a; lsSet('myschool-apps',m); return Promise.resolve(); }
@@ -1955,15 +1961,15 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     },
     list:function(){
       if(!FB.url){ var m=lsGet('myschool-apps'); return Promise.resolve(Object.keys(m).map(function(k){return m[k]})); }
-      return fetch(FB.url+'/applications.json?auth='+token).then(okj).then(function(d){ d=d||{}; return Object.keys(d).map(function(k){return d[k]}); });
+      return ensureToken().then(function(){ return fetch(FB.url+'/applications.json?auth='+token); }).then(okj).then(function(d){ d=d||{}; return Object.keys(d).map(function(k){return d[k]}); });
     },
     remove:function(id){
       if(!FB.url){ var m=lsGet('myschool-apps'); delete m[id]; lsSet('myschool-apps',m); return Promise.resolve(); }
-      return fetch(FB.url+'/applications/'+id+'.json?auth='+token,{method:'DELETE'}).then(okj);
+      return ensureToken().then(function(){ return fetch(FB.url+'/applications/'+id+'.json?auth='+token,{method:'DELETE'}); }).then(okj);
     },
     set:function(id,status){
       if(!FB.url){ var m=lsGet('myschool-apps'); if(m[id]) m[id].status=status; lsSet('myschool-apps',m); return Promise.resolve(); }
-      return fetch(FB.url+'/applications/'+id+'.json?auth='+token,{method:'PATCH',body:JSON.stringify({status:status})}).then(okj);
+      return ensureToken().then(function(){ return fetch(FB.url+'/applications/'+id+'.json?auth='+token,{method:'PATCH',body:JSON.stringify({status:status})}); }).then(okj);
     }
   };
   function fbLogin(){
@@ -1996,7 +2002,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   function appNotes(){ renderNotes(); }
   $('#apList').addEventListener('click',function(e){
     var st=e.target.closest('[data-aset]'), lg=e.target.closest('[data-alogin]');
-    if(lg){ fbLogin().then(renderApps); return; }
+    if(lg){ renderApps(); return; }
     if(st){
       DB.set(st.getAttribute('data-aid'),st.getAttribute('data-aset')).then(function(){ toast('Saqlandi'); renderApps(); })
         .catch(function(){ token=''; toast("Saqlab bo'lmadi. Qayta kiring."); renderApps(); });
@@ -2026,7 +2032,6 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   });
   function renderApps(){
     var l=$('#apList'), note=FB.url?'':'<p class="hint">Demo rejim: arizalar faqat shu brauzerda saqlanadi.</p>';
-    if(FB.url&&!token){ l.innerHTML='<p class="card empty">Arizalarni ko\'rish uchun kiring.</p><div class="adm-btns"><button type="button" class="btn small" data-alogin>Kirish</button></div>'; return; }
     l.innerHTML=note+'<p class="card empty">Yuklanmoqda...</p>';
     DB.list().then(function(arr){
       arr=arr.filter(function(a){return !contentLoaded||exists(a.kind,a.evId)}); arr.sort(byNew);
@@ -2037,7 +2042,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
           (ok?'<button type="button" class="pill solid" data-aset="approved" data-aid="'+esc(a.id)+'">Tasdiqlash</button>':'')+
           (no?'<button type="button" class="pill" data-aset="rejected" data-aid="'+esc(a.id)+'">Rad etish</button>':'')+'</div></div>';
       }).join(''):'<p class="card empty">Hali ariza yo\'q.</p>');
-    }).catch(function(){ token=''; l.innerHTML=note+'<p class="card empty">Arizalarni yuklab bo\'lmadi.</p><div class="adm-btns"><button type="button" class="btn small" data-alogin>Qayta kirish</button></div>'; });
+    }).catch(function(){ token=''; l.innerHTML=note+'<p class="card empty">Arizalarni yuklab bo\'lmadi. Firebase qoidalarini tekshiring.</p><div class="adm-btns"><button type="button" class="btn small" data-alogin>Qayta urinish</button></div>'; });
   }
 
 /* ---------- Admin: rating (students + classes, points log) ---------- */
@@ -2171,7 +2176,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   var usersCache=[];
   function usersList(){
     if(!FB.url){ var m=lsGet('myschool-users'); return Promise.resolve(Object.keys(m).map(function(k){return m[k]})); }
-    return fetch(FB.url+'/users.json?auth='+token).then(okj).then(function(d){ d=d||{}; return Object.keys(d).map(function(k){return d[k]}); });
+    return ensureToken().then(function(){ return fetch(FB.url+'/users.json?auth='+token); }).then(okj).then(function(d){ d=d||{}; return Object.keys(d).map(function(k){return d[k]}); });
   }
   function fmtTs(t){ if(!t) return '—'; var d=new Date(t); return d.getDate()+'-'+MONTHS[d.getMonth()]+' '+d.getFullYear()+', '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2); }
   function userCard(u){
@@ -2184,13 +2189,12 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   }
   function renderUsers(){
     var l=$('#aList'), note=FB.url?'':'<p class="hint">Demo rejim: foydalanuvchilar faqat shu brauzerda ko\'rinadi. Hammasini ko\'rish uchun Firebase ulang.</p>';
-    if(FB.url&&!token){ l.innerHTML='<p class="card empty">Foydalanuvchilarni ko\'rish uchun admin hisobi bilan kiring.</p><div class="adm-btns"><button type="button" class="btn small" data-ulogin>Kirish</button></div>'; return; }
     l.innerHTML=note+'<p class="card empty">Yuklanmoqda...</p>';
     usersList().then(function(arr){
       arr.sort(function(a,b){return (b.ts||0)-(a.ts||0)}); usersCache=arr;
       l.innerHTML=note+'<div class="card arow"><div><b>'+arr.length+' ta ro\'yxatdan o\'tgan foydalanuvchi</b></div><div class="act"><button type="button" class="pill" id="uExport">CSV yuklab olish</button></div></div>'+
         (arr.length?arr.map(userCard).join(''):'<p class="card empty">Hali hech kim ro\'yxatdan o\'tmagan.</p>');
-    }).catch(function(){ token=''; l.innerHTML=note+'<p class="card empty">Ro\'yxatni yuklab bo\'lmadi.</p><div class="adm-btns"><button type="button" class="btn small" data-ulogin>Qayta kirish</button></div>'; });
+    }).catch(function(){ token=''; l.innerHTML=note+'<p class="card empty">Ro\'yxatni yuklab bo\'lmadi. Firebase Realtime Database qoidalarida (Rules) admin emailingizga o\'qishga ruxsat bering.</p><div class="adm-btns"><button type="button" class="btn small" data-ulogin>Qayta urinish</button></div>'; });
   }
   function exportUsers(){
     var cols=[['name','Ism familiya'],['klass','Sinf'],['school','Maktab'],['dob','Tug\'ilgan sana'],['phone','Telefon'],['email','Google email']];
@@ -2203,7 +2207,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   }
   $('#aList').addEventListener('click',function(e){
     if(cur!=='users') return;
-    if(e.target.closest('[data-ulogin]')){ fbLogin().then(renderUsers); return; }
+    if(e.target.closest('[data-ulogin]')){ renderUsers(); return; }
     if(e.target.closest('#uExport')) exportUsers();
   });
 
