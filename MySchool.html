@@ -831,11 +831,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
         </div>
         <h2 class="sub" id="aListTitle">Siz joylagan yangiliklar</h2>
         <div id="aList"></div>
-        <div class="card adm" style="margin-top:18px">
-          <b>Hammaga ko'rinishi uchun</b>
-          <p class="hint">Hammasi hozircha faqat shu brauzerda saqlanadi. Tugmani bosib news.json faylini yuklab oling va GitHub'dagi sayt papkasiga (myschool-final.html yoniga) yuklang. Yangiliklar, bellashuvlar, tashabbuslar, reyting va bosh sahifa rasmi shu bitta faylda bo'ladi.</p>
-          <div class="adm-btns"><button type="button" class="btn small" id="aExport">news.json ni yuklab olish</button></div>
-        </div>
+        
       </section>
 
       <!-- Profil -->
@@ -1931,12 +1927,6 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
       if(draft.editId===id) resetDraft();
       rebuildAll(); toast("O'chirildi");
     }
-  });
-  $('#aExport').addEventListener('click',function(){
-    var blob=new Blob([JSON.stringify(store)],{type:'application/json'}), a=document.createElement('a');
-    a.href=URL.createObjectURL(blob); a.download='news.json'; document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(function(){ URL.revokeObjectURL(a.href); },1000);
-    toast('news.json yuklab olindi');
   });
   $('#aOut').addEventListener('click',function(){
     isAdmin=false; try{ sessionStorage.removeItem('myschool-admin'); }catch(e){} syncAdminNav(); go('asosiy');
