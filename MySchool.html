@@ -4,6 +4,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Manrope:wght@400;500;600;700;800&display=swap">
+<script>try{var __t=localStorage.getItem('myschool-theme');if(__t)document.documentElement.setAttribute('data-theme',__t);}catch(e){}</script>
 <style>
 /* Layout: navy sidebar + content column on computers (880px and up); top bar + bottom tab bar on phones. */
 :root{
@@ -536,6 +537,40 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
   .seg button{min-width:0;white-space:normal;padding:9px 8px;font-size:13px;line-height:1.2}
 }
 #uPhone[aria-invalid="true"],#in-phone[aria-invalid="true"]{border-color:#d92d20!important}
+
+.gal img{opacity:0;transition:opacity .25s}.gal img.on{opacity:1}
+.gal-b{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:30px;height:30px;border:0;border-radius:50%;background:rgba(10,20,50,.55);color:#fff;font-size:20px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0}
+.gal-b.prev{left:8px}.gal-b.next{right:8px}
+.gal-d{position:absolute;bottom:8px;left:0;right:0;z-index:2;display:flex;justify-content:center;gap:5px}
+.gal-d span{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.55)}.gal-d span.on{background:#fff}
+.lnk-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 14px;border-radius:999px;background:#e85d04;color:#fff!important;font-weight:800;font-size:13px;text-decoration:none}
+.lnk-btn .ic{width:15px;height:15px}
+.hero-copy [hidden]{display:none!important}
+.modal input[readonly]{background:#eef2fb;color:#5a6a8f;cursor:not-allowed}
+
+.pod{position:relative;transition:transform .2s}.pod:hover{transform:translateY(-3px)}
+.pod.r1{box-shadow:0 10px 30px rgba(245,179,1,.35);animation:msGlow 2.8s ease-in-out infinite}
+@keyframes msGlow{50%{box-shadow:0 12px 40px rgba(245,179,1,.65)}}
+.pod .crown{animation:msBob 2.2s ease-in-out infinite}
+@keyframes msBob{50%{transform:translateY(-4px) rotate(-5deg)}}
+.tag{display:inline-block;margin:2px 0 0 6px;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.03em;vertical-align:middle}
+.pod .tag{margin:2px 0 0}
+.tag.t1{background:linear-gradient(135deg,#ffd75e,#f5a300);color:#3a2800}
+.tag.t2{background:linear-gradient(135deg,#e6edfb,#9fb0d6);color:#0c1a3d}
+.tag.t3{background:linear-gradient(135deg,#f6bf98,#d9763f);color:#3a1500}
+tr.t1 td{background:linear-gradient(90deg,var(--gold-soft),transparent)}
+tr.t2 td{background:linear-gradient(90deg,var(--silver-soft),transparent)}
+tr.t3 td{background:linear-gradient(90deg,var(--bronze-soft),transparent)}
+.rk{display:inline-grid;place-items:center;min-width:26px;height:26px;border-radius:50%;font-weight:800}
+tr.t1 .rk{background:#f5b301;color:#3a2800}tr.t2 .rk{background:#8da2cc;color:#0c1a3d}tr.t3 .rk{background:#e08a5b;color:#3a1500}
+.mv{display:inline-flex;align-items:center;gap:6px;margin-left:6px;font-size:12px;font-weight:800;white-space:nowrap}
+.mv small{font-size:11px;font-weight:800}
+.pod .mv{margin:0;justify-content:center}
+@media (prefers-reduced-motion:reduce){.pod.r1,.pod .crown{animation:none}}
+#pfAv img{cursor:zoom-in}
+#phBox{position:fixed;inset:0;z-index:9999;background:rgba(5,10,25,.88);display:grid;place-items:center;padding:16px;cursor:zoom-out}
+#phBox img{max-width:94vw;max-height:88vh;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#phBox button{position:fixed;top:14px;right:14px;width:40px;height:40px;border:0;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;font-size:22px;cursor:pointer}
 </style>
 
 <div id="loader" role="status" aria-live="polite">
@@ -618,6 +653,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
       <div class="top-in">
         <div class="logo"><span class="logo-mark" id="logoMark2"></span><span>MySchool</span></div>
         <div class="top-gap"></div>
+        <button type="button" class="icon-btn" id="themeBtn" aria-label="Theme"><span id="themeIc"></span></button>
         <div class="lang"><button type="button" class="icon-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Til"><span id="langIc"></span><span id="langCode">UZ</span></button><ul class="lmenu" id="langMenu" hidden></ul></div><button type="button" class="icon-btn" id="bell" aria-label="Bildirishnomalar" aria-expanded="false" aria-controls="notes"><span id="bellIc"></span><span class="dot" id="bellDot"></span></button>
         <div class="userwrap"><button type="button" class="user" id="userBtn" aria-haspopup="true" aria-expanded="false" aria-label="Mening profilim"><span class="av" id="avIc"></span><span class="user-name" data-pf="name">Foydalanuvchi</span><span id="chevIc"></span></button><div class="umenu" id="userMenu" hidden><button type="button" data-go="profil"><span data-ic="user"></span><span>Mening profilim</span></button><button type="button" data-go="admin"><span data-ic="crown"></span><span>Admin</span></button><button type="button" id="menuOut"><span data-ic="logout"></span><span>Chiqish</span></button></div></div>
         <div class="notes" id="notes" hidden>
@@ -785,7 +821,6 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
         </div>
         <div class="card contact" id="contactBox" hidden>
           <b>Kelajak Lideri</b>
-          <span><span>Telefon:</span> +998 95 011 26 04</span>
           <span>Telegram: <a href="https://t.me/myschool_N33" target="_blank" rel="noopener">@myschool_N33</a></span>
           <span>Instagram: <a href="https://instagram.com/myschool_33" target="_blank" rel="noopener">myschool_33</a></span>
         </div>
@@ -820,6 +855,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
           <button type="button" data-atype="rating" aria-pressed="false">Reyting</button>
           <button type="button" data-atype="hero" aria-pressed="false">Bosh sahifa</button>
           <button type="button" data-atype="users" aria-pressed="false">Foydalanuvchilar</button>
+          <button type="button" data-atype="faq" aria-pressed="false">Savollar</button>
         </div>
         <div class="card adm" id="aForm">
           <label>Sarlavha<input class="field" id="aTitle" maxlength="120" autocomplete="off"></label>
@@ -828,7 +864,8 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
           <label id="aDateRow" hidden><span id="aDateLbl">Sana</span><input class="field" id="aDate" maxlength="80" autocomplete="off"></label>
           <label>Qisqa matn (kartada ko'rinadi)<input class="field" id="aText" maxlength="160" autocomplete="off" placeholder="Bir-ikki gapda"></label>
           <label>To'liq matn<textarea class="field" id="aMore" rows="7" placeholder="Batafsil yozing..."></textarea></label>
-          <label>Rasmlar (4 tagacha)<input type="file" id="aImgs" accept="image/*" multiple></label>
+          <label>Havola (masalan, Telegram kanal)<input class="field" id="aLink" type="url" maxlength="300" autocomplete="off" placeholder="https://t.me/..."></label>
+          <label>Rasmlar (6 tagacha)<input type="file" id="aImgs" accept="image/*" multiple></label>
           <p class="hint">Birinchi rasm muqova bo'ladi. Rasmlar avtomatik kichraytiriladi.</p>
           <div class="thumbs" id="aThumbs"></div>
           <div class="adm-btns">
@@ -1044,6 +1081,10 @@ window.fmtPhone=function(d){ return '+998 '+d.slice(0,2)+' '+d.slice(2,5)+' '+d.
   window.__msSyncUser=function(p){ if(cur&&!isAdminUser(cur)) saveUser(cur,p,false,true); };
   window.__msGetToken=function(){ return (fb&&fb.currentUser)?fb.currentUser.getIdToken(true).catch(function(){return '';}):Promise.resolve(''); };
   function toInfo(u){ fillInfo(u); root.classList.remove('authed'); gate.hidden=false; showStep('info'); }
+  function showBan(){
+    try{ Promise.resolve(A.out()); }catch(e){}
+    document.body.innerHTML='<div style="min-height:100vh;display:grid;place-items:center;text-align:center;font-family:Manrope,system-ui,sans-serif;color:#0e1f4d;background:#f1f5ff"><div><div style="font-size:96px;font-weight:800;line-height:1">404</div><p style="font-size:18px;margin:12px 0 0">Page not found</p></div></div>';
+  }
   function onUser(u){
     setAdmin(isAdminUser(u));
     if(isAdminUser(u)){
@@ -1063,6 +1104,7 @@ window.fmtPhone=function(d){ return '+998 '+d.slice(0,2)+' '+d.slice(2,5)+' '+d.
       if(cur!==u) return;
       if(!res.ok){ if(p&&p.done) activate(u,p); else toInfo(u); return; } // database unreachable: keep working from the local copy
       var r=res.data;
+      if(r&&r.banned){ showBan(); return; }
       if(!(r&&r.name&&r.klass)){ forgetLocal(u); toInfo(u); return; }
       var q=(p&&p.done)?p:{done:true,name:r.name,klass:r.klass,school:r.school||'',dob:r.dob||'',phone:r.phone||'',email:u.email||'',photo:''};
       if(!(p&&p.done)){ try{ localStorage.setItem('myschool-prof-'+u.uid,JSON.stringify(q)); }catch(e){} }
@@ -1195,9 +1237,9 @@ window.fmtPhone=function(d){ return '+998 '+d.slice(0,2)+' '+d.slice(2,5)+' '+d.
   var lang='uz'; try{ var sl=localStorage.getItem('myschool-lang'); if(LANG_LIST.some(function(l){return l[0]===sl})) lang=sl; }catch(e){}
   var D={}, FT=[];
   `Yuklanmoqda|Загрузка|Loading|Жүктелуде
-Katta orzular kichik qadamlar bilan|Большие мечты начинаются с|Big dreams start with|Үлкен арманлар
+Katta orzular kichik qadamlar bilan|Большие мечты начинаются с|Big dreams start with|Үлкен армандар
 boshlanadi!|маленьких шагов!|small steps!|кішкентай қадамдардан басталады!
-Katta orzular kichik qadamlar bilan boshlanadi!|Большие мечты начинаются с маленьких шагов!|Big dreams start with small steps!|Үлкен арманлар кішкентай қадамдардан басталады!
+Katta orzular kichik qadamlar bilan boshlanadi!|Большие мечты начинаются с маленьких шагов!|Big dreams start with small steps!|Үлкен армандар кішкентай қадамдардан басталады!
 Bugun o'zingning eng yaxshi versiyang uchun yana bir qadam qo'y!|Сделай ещё один шаг к лучшей версии себя!|Take one more step toward your best self today!|Бүгін өзіңнің ең үздік нұсқаңа қарай тағы бір қадам жаса!
 Boshlash|Начать|Start|Бастау
 Bilim kuchdir|Знание — сила|Knowledge is power|Білім — күш
@@ -1350,6 +1392,169 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
 Как участники команды соревнуются между собой?|Каждый участник соревнуется с товарищами по команде. Индивидуальные результаты и занятые места определяют его достижения в соревновании.|How do team members compete with each other?|Each member competes with teammates. Individual results and places determine their achievements in the competition.|Команда мүшелері өзара қалай жарысады?|Әр команда мүшесі командаластарымен жарысады. Қатысушылардың жеке нәтижелері мен иеленген орындары олардың жетістіктерін анықтайды.
 Как набираются баллы?|Ученики получают баллы за результаты в соревнованиях. Баллы формируют личный рейтинг и рейтинг классов. Ученики и классы с лучшими результатами награждаются кубками.|How are points earned?|Students earn points for their competition results. Points shape personal and class rankings. Top students and classes receive cups.|Баллдар қалай жиналады?|Оқушылар жарыстардағы нәтижесіне қарай балл жинайды. Жиналған баллдар жеке рейтингті және сыныптар рейтингін қалыптастырады. Ең жоғары нәтиже көрсеткен оқушылар мен сыныптар кубоктармен марапатталады.`.split('\n').forEach(function(r,i){ var p=r.split('|'); if(p.length===6) FT[i]={ru:[p[0],p[1]],en:[p[2],p[3]],kk:[p[4],p[5]]}; });
   function tr(x){ var d=D[x]; return (lang!=='uz'&&d&&d[lang])||x; }
+
+  var ADT=`Ro'yxatni yuklab bo'lmadi. Firebase qoidalarini tekshiring.|Не удалось загрузить список. Проверьте правила Firebase.|Could not load the list. Check the Firebase rules.|Тізімді жүктеу мүмкін болмады. Firebase ережелерін тексеріңіз.
+Admin paneli|Панель администратора|Admin panel|Әкімші панелі
+Yangilik, bellashuv va tashabbus qo'shing. Rasmlar bilan birga.|Добавляйте новости, соревнования и инициативы с фото.|Add news, competitions and initiatives, with pictures.|Жаңалық, жарыс және бастама қосыңыз. Суреттермен бірге.
+Bosh sahifa|Главная страница|Home page|Басты бет
+Foydalanuvchilar|Пользователи|Users|Пайдаланушылар
+Sarlavha|Заголовок|Title|Тақырып
+Turi|Тип|Type|Түрі
+Oy (filtr uchun)|Месяц (для фильтра)|Month (for filter)|Ай (сүзгі үшін)
+Sana|Дата|Date|Күні
+Sana (masalan: 15-may 2026)|Дата (например: 15 мая 2026)|Date (e.g. 15 May 2026)|Күні (мысалы: 2026 жылғы 15 мамыр)
+Jadval (masalan: Har juma, 15:00)|Расписание (например: по пятницам, 15:00)|Schedule (e.g. Every Friday, 15:00)|Кесте (мысалы: Әр жұма, 15:00)
+Qisqa matn (kartada ko'rinadi)|Краткий текст (на карточке)|Short text (shown on the card)|Қысқа мәтін (карточкада көрінеді)
+To'liq matn|Полный текст|Full text|Толық мәтін
+Rasmlar (6 tagacha)|Фото (до 6)|Pictures (up to 6)|Суреттер (6-ға дейін)
+Birinchi rasm muqova bo'ladi. Rasmlar avtomatik kichraytiriladi.|Первое фото — обложка. Фото уменьшаются автоматически.|The first picture is the cover. Pictures are resized automatically.|Бірінші сурет — мұқаба. Суреттер автоматты түрде кішірейтіледі.
+Havola (masalan, Telegram kanal)|Ссылка (например, Telegram-канал)|Link (e.g. Telegram channel)|Сілтеме (мысалы, Telegram арнасы)
+Havolani ochish|Открыть ссылку|Open link|Сілтемені ашу
+Joylash|Опубликовать|Publish|Жариялау
+Yangilash|Обновить|Update|Жаңарту
+Siz joylagan yangiliklar|Ваши новости|Your news|Сіз жариялаған жаңалықтар
+Siz qo'shgan bellashuvlar|Ваши соревнования|Your competitions|Сіз қосқан жарыстар
+Siz qo'shgan tashabbuslar|Ваши инициативы|Your initiatives|Сіз қосқан бастамалар
+Hali hech narsa qo'shmadingiz.|Вы ещё ничего не добавили.|You haven't added anything yet.|Әлі ештеңе қосқан жоқсыз.
+O'chirish|Удалить|Delete|Жою
+# rasm|# фото|# pictures|# сурет
+Bosh sahifa rasmi|Фото главной страницы|Home page pictures|Басты бет суреттері
+Ro'yxatdan o'tgan foydalanuvchilar|Зарегистрированные пользователи|Registered users|Тіркелген пайдаланушылар
+Reyting: ball berish va boshqarish|Рейтинг: баллы и управление|Ranking: points and management|Рейтинг: балл беру және басқару
+Bellashuvlar va tashabbuslarga kelgan arizalarni tasdiqlang yoki rad eting.|Одобряйте или отклоняйте заявки на соревнования и инициативы.|Approve or reject applications for competitions and initiatives.|Жарыстар мен бастамаларға келген өтінімдерді бекітіңіз немесе қабылдамаңыз.
+Bir-ikki gapda|В одном-двух предложениях|In a sentence or two|Бір-екі сөйлеммен
+Batafsil yozing...|Напишите подробно...|Write in detail...|Толығырақ жазыңыз...
+Yuklanmoqda...|Загрузка...|Loading...|Жүктелуде...
+Tasdiqlash|Одобрить|Approve|Бекіту
+Rad etish|Отклонить|Reject|Қабылдамау
+Hali ariza yo'q.|Заявок пока нет.|No applications yet.|Әзірге өтінімдер жоқ.
+Tel|Тел|Tel|Тел
+Saqlandi|Сохранено|Saved|Сақталды
+Qayta urinish|Повторить|Retry|Қайта көру
+Arizalarni yuklab bo'lmadi. Firebase qoidalarini tekshiring.|Не удалось загрузить заявки. Проверьте правила Firebase.|Could not load applications. Check the Firebase rules.|Өтінімдерді жүктеу мүмкін болмады. Firebase ережелерін тексеріңіз.
+Ro'yxatdan o'tgan|Зарегистрирован|Registered|Тіркелген
+Oxirgi kirish|Последний вход|Last login|Соңғы кіру
+# ta ro'yxatdan o'tgan foydalanuvchi|Зарегистрировано пользователей: #|# registered users|Тіркелген пайдаланушы: #
+CSV yuklab olish|Скачать CSV|Download CSV|CSV жүктеу
+Hali hech kim ro'yxatdan o'tmagan.|Пока никто не зарегистрировался.|Nobody has registered yet.|Әлі ешкім тіркелген жоқ.
+Ro'yxatni yuklab bo'lmadi. Firebase Realtime Database qoidalarida (Rules) admin emailingizga o'qishga ruxsat bering.|Не удалось загрузить список. В правилах (Rules) Firebase Realtime Database разрешите чтение для email администратора.|Could not load the list. In Firebase Realtime Database Rules, allow your admin email to read.|Тізімді жүктеу мүмкін болмады. Firebase Realtime Database ережелерінде (Rules) әкімші email-іне оқуға рұқсат беріңіз.
+Foydalanuvchini qidirish...|Поиск пользователя...|Search users...|Пайдаланушыны іздеу...
+Hech kim topilmadi.|Никого не найдено.|No one found.|Ешкім табылмады.
+Bloklash|Заблокировать|Ban|Бұғаттау
+Blokdan chiqarish|Разблокировать|Unban|Бұғаттан шығару
+Bloklangan|Заблокирован|Banned|Бұғатталған
+Takroriy ma'lumot|Дубликат данных|Duplicate details|Қайталанған деректер
+Bu foydalanuvchi bloklansinmi? U saytga kira olmaydi.|Заблокировать этого пользователя? Он не сможет войти на сайт.|Ban this user? They will not be able to enter the site.|Бұл пайдаланушыны бұғаттау керек пе? Ол сайтқа кіре алмайды.
+Bloklandi|Заблокирован|Banned|Бұғатталды
+Blokdan chiqarildi|Разблокирован|Unbanned|Бұғаттан шығарылды
+Saqlab bo'lmadi. Firebase qoidalarini tekshiring.|Не удалось сохранить. Проверьте правила Firebase.|Could not save. Check the Firebase rules.|Сақтау мүмкін болмады. Firebase ережелерін тексеріңіз.
+Ball berish|Начислить баллы|Award points|Балл беру
+O'quvchiga|Ученику|To a student|Оқушыға
+Sinfga|Классу|To a class|Сыныпқа
+Bu sinfda o'quvchi yo'q|В этом классе нет учеников|No students in this class|Бұл сыныпта оқушы жоқ
+Ball (minus bo'lsa ayiradi)|Баллы (минус — вычесть)|Points (negative subtracts)|Балл (минус болса азайтады)
+Masalan: 10|Например: 10|E.g. 10|Мысалы: 10
+Masalan: Matematika olimpiadasi|Например: олимпиада по математике|E.g. Math olympiad|Мысалы: математика олимпиадасы
+Sinfdagi ko'p o'quvchiga birdan|Сразу нескольким ученикам класса|To many students of a class at once|Сыныптағы бірнеше оқушыға бірден
+Sinfni tanlang, kerakli o'quvchilar yoniga ball yozing va bir marta bosing. Bo'sh qoldirilganlarga ball berilmaydi.|Выберите класс, впишите баллы рядом с нужными учениками и нажмите один раз. Пустым баллы не начисляются.|Pick a class, type points next to students and press once. Empty ones get no points.|Сыныпты таңдап, керек оқушылардың қасына балл жазыңыз да, бір рет басыңыз. Бос қалғандарға балл берілмейді.
+Hammasini saqlash|Сохранить всё|Save all|Барлығын сақтау
+O'quvchilar va sinflar|Ученики и классы|Students and classes|Оқушылар мен сыныптар
+Yangi sinf|Новый класс|New class|Жаңа сынып
+Sinf qo'shish|Добавить класс|Add class|Сынып қосу
+# o'quvchi|# учеников|# students|# оқушы
+Sinfni o'chirish|Удалить класс|Delete class|Сыныпты жою
+O'quvchi yo'q.|Учеников нет.|No students.|Оқушы жоқ.
+So'nggi berilgan ballar|Последние начисления|Recent points|Соңғы берілген баллдар
+Hali ball berilmagan.|Баллы ещё не начислялись.|No points awarded yet.|Әлі балл берілген жоқ.
+Ro'yxatdan o'tgan foydalanuvchilardan qo'shing|Добавьте из зарегистрированных пользователей|Add from registered users|Тіркелген пайдаланушылардан қосыңыз
+Foydalanuvchi o'z sinfiga avtomatik qo'shiladi. Ismni yozish shart emas.|Пользователь автоматически попадёт в свой класс. Вводить имя не нужно.|The user is added to their own class automatically. No need to type names.|Пайдаланушы өз сыныбына автоматты түрде қосылады. Атын жазудың қажеті жоқ.
+Reytingga qo'shish|Добавить в рейтинг|Add to ranking|Рейтингке қосу
+Reytingga qo'shildi|Добавлен в рейтинг|Added to ranking|Рейтингке қосылды
+Reytingda|В рейтинге|In ranking|Рейтингте
+Ism bo'yicha qidirish...|Поиск по имени...|Search by name...|Аты бойынша іздеу...
+Sinf ko'rsatilmagan|Класс не указан|No class given|Сынып көрсетілмеген
+Bosh sahifa uchun # tagacha rasm qo'shing. Bir nechta bo'lsa, ular o'zi almashib turadi. Rasm bo'lmasa, standart rasm ko'rinadi.|Добавьте до # фото для главной страницы. Если их несколько, они сменяются сами. Без фото показывается стандартное изображение.|Add up to # pictures for the home page. If there are several, they rotate automatically. With none, the default picture is shown.|Басты бет үшін # суретке дейін қосыңыз. Бірнеше болса, олар өздігінен ауысады. Сурет болмаса, стандартты сурет көрінеді.
+Rasm qo'shish (#/#)|Добавить фото (#/#)|Add pictures (#/#)|Сурет қосу (#/#)
+Standart rasmga qaytish|Вернуть стандартное фото|Restore default picture|Стандартты суретке қайту
+Bosh sahifa matni|Текст главной страницы|Home page text|Басты бет мәтіні
+Bosh sahifadagi shior va izohni o'zgartiring. Bo'sh qoldirilsa, standart matn ko'rinadi.|Измените девиз и описание на главной странице. Если оставить пустым, будет стандартный текст.|Change the slogan and description on the home page. If left empty, the default text is shown.|Басты беттегі ұран мен сипаттаманы өзгертіңіз. Бос қалса, стандартты мәтін көрінеді.
+Shior (asosiy qism)|Девиз (основная часть)|Slogan (main part)|Ұран (негізгі бөлік)
+Shior (ajratilgan qism)|Девиз (выделенная часть)|Slogan (highlighted part)|Ұран (ерекшеленген бөлік)
+Izoh|Описание|Description|Сипаттама
+Standart matnga qaytish|Вернуть стандартный текст|Restore default text|Стандартты мәтінге қайту
+Savol|Вопрос|Question|Сұрақ
+Javob|Ответ|Answer|Жауап
+Savol qo'shish|Добавить вопрос|Add question|Сұрақ қосу
+Savol va javobni kamida o'zbek tilida yozing|Напишите вопрос и ответ хотя бы на узбекском|Write the question and answer at least in Uzbek|Сұрақ пен жауапты кемінде өзбек тілінде жазыңыз
+Boshqa tillar bo'sh qolsa, o'zbekcha matn ko'rinadi.|Если другие языки пусты, показывается узбекский текст.|If other languages are empty, the Uzbek text is shown.|Басқа тілдер бос болса, өзбекше мәтін көрсетіледі.
+Standart savollarga qaytish|Вернуть стандартные вопросы|Restore default questions|Стандартты сұрақтарға қайту
+Standart savollar qaytarildi|Стандартные вопросы возвращены|Default questions restored|Стандартты сұрақтар қайтарылды
+Standart rasm qaytarildi|Стандартное фото возвращено|Default picture restored|Стандартты сурет қайтарылды
+Standart matn qaytarildi|Стандартный текст возвращён|Default text restored|Стандартты мәтін қайтарылды
+Bosh sahifa matni saqlandi|Текст главной страницы сохранён|Home page text saved|Басты бет мәтіні сақталды
+Qo'shildi|Добавлено|Added|Қосылды
+Yangilandi|Обновлено|Updated|Жаңартылды
+O'chirildi|Удалено|Deleted|Жойылды
+Buni o'chirasizmi?|Удалить это?|Delete this?|Мұны жоясыз ба?
+Parol noto'g'ri|Неверный пароль|Wrong password|Құпия сөз қате
+Sarlavha va to'liq matnni yozing|Напишите заголовок и полный текст|Write the title and full text|Тақырып пен толық мәтінді жазыңыз
+Sana yoki jadvalni yozing|Укажите дату или расписание|Enter the date or schedule|Күнін немесе кестесін жазыңыз
+Eng ko'pi bilan # ta rasm|Не более # фото|At most # pictures|Ең көбі # сурет
+Xotira to'ldi. Rasmlarni kamaytiring.|Память заполнена. Уменьшите число фото.|Storage is full. Use fewer pictures.|Жад толды. Суреттер санын азайтыңыз.
+Rasmni o'qib bo'lmadi|Не удалось прочитать фото|Could not read the picture|Суретті оқу мүмкін болмады
+Saqlab bo'lmadi|Не удалось сохранить|Could not save|Сақтау мүмкін болмады
+Havola noto'g'ri. https:// bilan boshlang|Неверная ссылка. Начните с https://|Invalid link. Start with https://|Сілтеме қате. https:// деп бастаңыз
+Ballni kiriting|Введите баллы|Enter the points|Баллды енгізіңіз
+Hech kimga ball yozilmadi|Никому не указаны баллы|No points entered|Ешкімге балл жазылмады
+Sinf nomini yozing|Напишите название класса|Enter the class name|Сынып атауын жазыңыз
+Bunday sinf bor|Такой класс уже есть|This class already exists|Мұндай сынып бар
+Ball bekor qilindi|Баллы отменены|Points cancelled|Балл бас тартылды
+Avval rasm qo'shing|Сначала добавьте фото|Add a picture first|Алдымен сурет қосыңыз
+Qo'shildi. Hammaga ko'rsatish uchun news.json ni yuklab oling.|Добавлено. Чтобы показать всем, скачайте news.json.|Added. To show it to everyone, download news.json.|Қосылды. Барлығына көрсету үшін news.json жүктеп алыңыз.
+Bosh sahifa rasmlari saqlandi. Hammaga ko'rsatish uchun news.json ni yuklab oling.|Фото главной сохранены. Чтобы показать всем, скачайте news.json.|Home page pictures saved. To show them to everyone, download news.json.|Басты бет суреттері сақталды. Барлығына көрсету үшін news.json жүктеп алыңыз.
+Hammaga ko'rinishi uchun|Чтобы все видели|To show it to everyone|Барлығына көрінуі үшін
+news.json ni yuklab olish|Скачать news.json|Download news.json|news.json жүктеп алу
+Hammasi hozircha faqat shu brauzerda saqlanadi. Tugmani bosib news.json faylini yuklab oling va GitHub'dagi sayt papkasiga (myschool-final.html yoniga) yuklang. Yangiliklar, bellashuvlar, tashabbuslar, reyting va bosh sahifa rasmi shu bitta faylda bo'ladi.|Пока всё хранится только в этом браузере. Нажмите кнопку, скачайте news.json и загрузите его в папку сайта на GitHub (рядом с файлом сайта). Новости, соревнования, инициативы, рейтинг, фото главной и вопросы будут в этом одном файле.|For now everything is stored only in this browser. Press the button, download news.json and upload it to the site folder on GitHub (next to the site file). News, competitions, initiatives, ranking, home pictures and questions are all in this one file.|Әзірге барлығы тек осы браузерде сақталады. Түймені басып, news.json жүктеп алыңыз да, GitHub-тағы сайт папкасына (сайт файлының қасына) жүктеңіз. Жаңалықтар, жарыстар, бастамалар, рейтинг, басты бет суреттері және сұрақтар осы бір файлда болады.
+Chempion|Чемпион|Champion|Чемпион
+Zabardast|Великолепно|Superb|Керемет
+Yulduz|Звезда|Star|Жұлдыз
+o'rin ko'tarildi|мест вверх|places up|орынға көтерілді
+o'rin tushdi|мест вниз|places down|орынға түсті
+O'zgarmadi|Без изменений|No change|Өзгерген жоқ
+Rejim|Режим|Theme|Режим
+Hisob o'chirildi|Аккаунт удалён|Account deleted|Аккаунт жойылды
+Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое. Выберите меньше.|The picture is too large. Choose a smaller one.|Сурет тым үлкен. Кішірек сурет таңдаңыз.
+Saqlandi va hammaga e'lon qilindi|Сохранено и опубликовано для всех|Saved and published for everyone|Сақталды және барлығына жарияланды
+Avval sinf qo'shing|Сначала добавьте класс|Add a class first|Алдымен сынып қосыңыз
+Ismlarni yozing|Напишите имена|Enter the names|Аттарды жазыңыз
+O'chirib bo'lmadi. Firebase qoidalarini tekshiring.|Не удалось удалить. Проверьте правила Firebase.|Could not delete. Check the Firebase rules.|Жою мүмкін болмады. Firebase ережелерін тексеріңіз.
+Demo rejim: arizalar faqat shu brauzerda saqlanadi.|Демо-режим: заявки хранятся только в этом браузере.|Demo mode: applications are stored in this browser only.|Демо режимі: өтінімдер тек осы браузерде сақталады.
+Demo rejim: foydalanuvchilar faqat shu brauzerda ko'rinadi. Hammasini ko'rish uchun Firebase ulang.|Демо-режим: пользователи видны только в этом браузере. Подключите Firebase, чтобы видеть всех.|Demo mode: users are visible in this browser only. Connect Firebase to see everyone.|Демо режимі: пайдаланушылар тек осы браузерде көрінеді. Барлығын көру үшін Firebase қосыңыз.
+Bu sinfda hali o'quvchi yo'q. Pastdagi “O'quvchilar va sinflar” bo'limidan qo'shing.|В этом классе пока нет учеников. Добавьте их в разделе «Ученики и классы» ниже.|No students in this class yet. Add them in “Students and classes” below.|Бұл сыныпта әлі оқушы жоқ. Төмендегі «Оқушылар мен сыныптар» бөлімінен қосыңыз.
+Kelajak Lideri|Лидер будущего|Future Leader|Болашақ Лидері`;
+  ADT.split('\n').forEach(function(r){ var p=r.split('|'); if(p.length===4) D[p[0].trim()]={ru:p[1].trim(),en:p[2].trim(),kk:p[3].trim()}; });
+  function trL(s){
+    if(lang==='uz'||!s) return s;
+    var k=String(s).trim(); if(D[k]) return s.replace(k,function(){return D[k][lang]});
+    return String(s).split(/( · |: )/).map(function(p,i){
+      if(i%2) return p; var m=p.trim(), n=[], key=m.replace(/\d+/g,function(x){n.push(x);return '#'}), d=D[m]||D[key]; if(!d||!m) return p;
+      var t=d[lang], j=0; if(!D[m]) t=t.replace(/#/g,function(){return n[j++]||'#'});
+      return p.replace(m,function(){return t});
+    }).join('');
+  }
+  function xl(root){
+    if(!root) return; var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null), n, L=[];
+    while((n=w.nextNode())) L.push(n);
+    L.forEach(function(n){ var p=n.parentNode; if(!p||n.__st||/^(SCRIPT|STYLE)$/.test(p.nodeName)) return;
+      var o=(n.__o!==undefined&&n.nodeValue===n.__t)?n.__o:n.nodeValue; if(!o.trim()) return;
+      var t=trL(o); n.__o=o; n.__t=t; if(t!==n.nodeValue) n.nodeValue=t; });
+    $$('[placeholder]',root).forEach(function(el){
+      var c=el.getAttribute('placeholder'), o=(el.__ph!==undefined&&c===el.__pt)?el.__ph:c, t=trL(o); el.__ph=o; el.__pt=t; if(t!==c) el.setAttribute('placeholder',t); });
+  }
+  var XLS=['main.content','#apModal','#userMenu','header.top'];
+  function xlAll(){ XLS.forEach(function(s){ xl($(s)); }); }
+  try{ var xmo=new MutationObserver(xlAll); XLS.forEach(function(s){ var e=$(s); if(e) xmo.observe(e,{childList:true,subtree:true}); }); }catch(e){}
+  var confirm=function(s){ return confirm(trL(s)); };
   function mName(m){ var v=tr(m); return v.charAt(0).toUpperCase()+v.slice(1); }
   function gradeLbl(g){ return lang==='ru'?g+' \u043a\u043b\u0430\u0441\u0441\u044b':lang==='en'?'Grade '+g:lang==='kk'?g+'-\u0441\u044b\u043d\u044b\u043f\u0442\u0430\u0440':g+'-sinflar'; }
   function thr(a){ return '<tr><th scope="col">#</th>'+a.map(function(x){return '<th scope="col">'+tr(x)+'</th>'}).join('')+'</tr>'; }
@@ -1373,6 +1578,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     $$('[placeholder],[aria-label]').forEach(function(el){ if(el.closest('#gate')) return; ['placeholder','aria-label'].forEach(function(a){ var v=el.getAttribute(a); if(v&&D[v]) ST_ATTR.push([el,a,v]); }); });
   })();
   function applyStatic(){
+    ST_TXT.forEach(function(x){ x[0].__st=1; });
     ST_TXT.forEach(function(x){ x[0].nodeValue=x[2].replace(x[1],function(){return tr(x[1])}); });
     ST_ATTR.forEach(function(x){ x[0].setAttribute(x[1],tr(x[2])); });
     document.documentElement.lang=lang;
@@ -1417,6 +1623,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   $$('[data-ic]').forEach(function(el){el.innerHTML=ic(el.getAttribute('data-ic'))});
   var logoSvg='<img src="data:image/png;base64,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" alt="" width="38" height="38" style="display:block;width:100%;height:100%">';
   $('#logoMark').innerHTML=logoSvg; $('#logoMark2').innerHTML=logoSvg;
+  try{ var fu=(logoSvg.match(/src="([^"]+)"/)||[])[1]; if(fu){ ['icon','apple-touch-icon'].forEach(function(r){ var l=document.createElement('link'); l.rel=r; l.type='image/png'; l.href=fu; document.head.appendChild(l); }); } }catch(e){}
   $('#bellIc').innerHTML=ic('bell'); $('#langIc').innerHTML=ic('globe'); $('#avIc').innerHTML=ic('user'); $('#chevIc').innerHTML=ic('down','chev');
   $('#arrowHero').innerHTML=ic('arrow');
 
@@ -1455,6 +1662,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   function syncAdminNav(){
     var b=$('#nav [data-go="arizalar"]'); if(b) b.hidden=!isAdmin;
     $$('[data-go="admin"]').forEach(function(x){ x.hidden=!isAdmin; x.style.display=isAdmin?'':'none'; });
+    $$('[data-go="profil"]').forEach(function(x){ x.hidden=isAdmin; x.style.display=isAdmin?'none':''; });
   }
   window.__msSetAdmin=function(v){
     v=!!v&&!GUEST; if(v===isAdmin) return; isAdmin=v; syncAdminNav();
@@ -1464,6 +1672,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   function valid(id){return id==='admin'||VIEWS.some(function(v){return v.id===id})}
   function show(id){
     if(!valid(id)) id='asosiy';
+    if(id==='profil'&&isAdmin) id='asosiy';
     if((id==='admin'||id==='arizalar')&&!isAdmin){ if(curView!==id&&document.documentElement.classList.contains('authed')) toast(tr("Admin paneliga faqat admin hisobi kira oladi.")); id='asosiy'; try{ location.hash='asosiy'; }catch(e){} }
     $$('[data-view]').forEach(function(s){s.hidden=s.getAttribute('data-view')!==id});
     $$('#nav [data-go],#tabs [data-go]').forEach(function(b){
@@ -1483,7 +1692,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   /* ---------- Toast ---------- */
   var toastT;
   function toast(msg){
-    var t=$('#toast'); t.textContent=msg; t.classList.add('show');
+    var t=$('#toast'); t.textContent=trL(msg); t.classList.add('show');
     clearTimeout(toastT); toastT=setTimeout(function(){t.classList.remove('show')},2400);
   }
 
@@ -1540,7 +1749,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   function setLang(l){
     lang=l; try{ localStorage.setItem('myschool-lang',l); }catch(e){}
     if(window.__gateLang) window.__gateLang(l);
-    applyStatic(); buildNav(); syncAdminNav(); buildLangUI(); fillProfile(); rebuildAll(); renderFaq();
+    applyStatic(); buildNav(); syncAdminNav(); buildLangUI(); fillProfile(); rebuildAll(); renderFaq(); xlAll();
     $('#pfEditLbl').textContent=tr($('#pfCard').classList.contains('editing')?'Saqlash':'Tahrirlash');
     var ap=$('[data-view="arizalar"]'); if(ap&&!ap.hidden) renderApps();
     closeLang();
@@ -1572,22 +1781,33 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
 
   /* ---------- Toggle helpers ---------- */
   function moreBtn(id){return '<button type="button" class="link" data-toggle="more-'+id+'" aria-expanded="false" aria-controls="more-'+id+'"><span>'+tr('Batafsil')+'</span>'+ic('arrow')+'</button>'}
-  function moreBox(id,t,imgs){
-    if(imgs&&imgs.length>1) return '<div class="more" id="more-'+id+'" hidden>'+t+'<div class="gallery">'+imgs.slice(1).map(function(u){return '<img src="'+u+'" alt="" loading="lazy">'}).join('')+'</div></div>';
-    return '<p class="more" id="more-'+id+'" hidden>'+t+'</p>';
+  function moreBox(id,t,imgs,link){
+    var lk=link?'<br><a class="lnk-btn" href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">'+ic('arrow')+'<span>'+tr('Havolani ochish')+'</span></a>':'';
+    return '<div class="more" id="more-'+id+'" hidden>'+t+lk+'</div>';
   }
-  function thumb(n){return n.imgs&&n.imgs.length?'<div class="art img"><img src="'+n.imgs[0]+'" alt=""></div>':art(n.theme,n.icon)}
+  function thumb(n){
+    if(!n.imgs||!n.imgs.length) return art(n.theme,n.icon);
+    if(n.imgs.length<2) return '<div class="art img"><img src="'+n.imgs[0]+'" alt=""></div>';
+    return '<div class="art img gal" data-gal="0">'+n.imgs.map(function(u,i){return '<img src="'+u+'" alt=""'+(i?' class="" loading="lazy"':' class="on"')+'>'}).join('')+
+      '<button type="button" class="gal-b prev" data-gstep="-1" aria-label="Prev">&#8249;</button><button type="button" class="gal-b next" data-gstep="1" aria-label="Next">&#8250;</button><div class="gal-d">'+n.imgs.map(function(u,i){return '<span'+(i?'':' class="on"')+'></span>'}).join('')+'</div></div>';
+  }
+  function galStep(g,d){
+    if(!g) return; var im=g.querySelectorAll('img'), dt=g.querySelectorAll('.gal-d span'), n=im.length, i=((+g.getAttribute('data-gal')+d)%n+n)%n;
+    g.setAttribute('data-gal',i); for(var k=0;k<n;k++){ im[k].classList.toggle('on',k===i); if(dt[k]) dt[k].classList.toggle('on',k===i); }
+  }
+  (function(){ var sx=null; document.addEventListener('touchstart',function(e){ sx=e.target.closest&&e.target.closest('.gal')?e.touches[0].clientX:null; },{passive:true});
+    document.addEventListener('touchend',function(e){ if(sx===null) return; var g=e.target.closest('.gal'), dx=e.changedTouches[0].clientX-sx; sx=null; if(g&&Math.abs(dx)>40) galStep(g,dx<0?1:-1); },{passive:true}); })();
 
   /* ---------- News ---------- */
   function feat(n){
     return '<article class="card feat"><div class="feat-art">'+thumb(n)+'<span class="badge">'+ic('bolt')+locDate(n.date)+'</span></div>'+
-      '<div class="feat-body"><h2>'+n.title+'</h2><p>'+n.text+'</p>'+moreBtn(n.id)+moreBox(n.id,n.more,n.imgs)+'</div></article>';
+      '<div class="feat-body"><h2>'+n.title+'</h2><p>'+n.text+'</p>'+moreBtn(n.id)+moreBox(n.id,n.more,n.imgs,n.link)+'</div></article>';
   }
   function mini(n){
-    return '<article class="card mini">'+thumb(n)+'<div><span class="date">'+locDate(n.date)+'</span><h3>'+n.title+'</h3>'+moreBtn(n.id)+'</div>'+moreBox(n.id,n.more,n.imgs)+'</article>';
+    return '<article class="card mini">'+thumb(n)+'<div><span class="date">'+locDate(n.date)+'</span><h3>'+n.title+'</h3>'+moreBtn(n.id)+'</div>'+moreBox(n.id,n.more,n.imgs,n.link)+'</article>';
   }
   function row(n){
-    return '<article class="card row">'+thumb(n)+'<div style="min-width:0"><span class="date">'+locDate(n.date)+'</span><h3>'+n.title+'</h3><p>'+n.text+'</p></div><div class="act">'+moreBtn(n.id)+'</div>'+moreBox(n.id,n.more,n.imgs)+'</article>';
+    return '<article class="card row">'+thumb(n)+'<div style="min-width:0"><span class="date">'+locDate(n.date)+'</span><h3>'+n.title+'</h3><p>'+n.text+'</p></div><div class="act">'+moreBtn(n.id)+'</div>'+moreBox(n.id,n.more,n.imgs,n.link)+'</article>';
   }
   function renderNews(){
     var q=$('#newsQ').value.trim().toLowerCase(), box=$('#newsBox');
@@ -1610,7 +1830,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     $('#evBox').innerHTML=r.length?r.map(function(e){
       return '<article class="card ev">'+thumb(e)+'<div style="min-width:0"><span class="chip '+e.cls+'">'+tr(e.cat)+'</span><h3>'+e.title+'</h3>'+
         '<div class="when">'+ic('calendar')+'<span>'+locDate(e.date)+'</span></div><p>'+e.text+'</p></div>'+
-        '<div class="act">'+moreBtn(e.id).replace('class="link"','class="pill"')+applyBtn(e)+'</div>'+moreBox(e.id,e.more,e.imgs)+'</article>';
+        '<div class="act">'+moreBtn(e.id).replace('class="link"','class="pill"')+applyBtn(e)+'</div>'+moreBox(e.id,e.more,e.imgs,e.link)+'</article>';
     }).join(''):'<p class="card empty">'+(EVENTS.length?tr("Bu oyda bellashuvlar yo'q."):tr("Hozircha bellashuvlar yo'q."))+'</p>';
   }
   $('#evMonth').addEventListener('change',renderEvents);
@@ -1624,7 +1844,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
       return '<article class="card ev">'+thumb(t)+'<div style="min-width:0"><span class="chip '+t.cls+'">'+tr(t.cat)+'</span><h3>'+t.title+'</h3>'+
         '<div class="when">'+ic('calendar')+'<span>'+t.when+'</span></div><p>'+t.text+'</p></div>'+
         '<div class="act">'+moreBtn(t.id).replace('class="link"','class="pill"')+
-        applyBtn(t)+'</div>'+moreBox(t.id,t.more,t.imgs)+'</article>';
+        applyBtn(t)+'</div>'+moreBox(t.id,t.more,t.imgs,t.link)+'</article>';
     }).join('');
   }
   $('#tbFilter').addEventListener('click',function(e){
@@ -1640,9 +1860,9 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
 
   if(GUEST) profile.name='Mehmon';
   function delta(d){
-    if(d>0) return '<span class="up" title="'+d+' o\'rin ko\'tarildi">'+ic('up')+d+'</span>';
-    if(d<0) return '<span class="down" title="'+(-d)+' o\'rin tushdi">'+ic('dn')+(-d)+'</span>';
-    return '<span class="flat" title="O\'zgarmadi">—</span>';
+    if(d>0) return '<span class="up" title="'+d+' '+tr("o'rin ko'tarildi")+'">'+ic('up')+d+'</span>';
+    if(d<0) return '<span class="down" title="'+(-d)+' '+tr("o'rin tushdi")+'">'+ic('dn')+(-d)+'</span>';
+    return '<span class="flat" title="'+tr("O'zgarmadi")+'">—</span>';
   }
   function fmtPts(v){ v=Math.round(v*10)/10; return Number.isInteger(v)?String(v):v.toFixed(1); }
   function normName(t){ return String(t||'').toLowerCase().replace(/\s+/g,' ').trim(); }
@@ -1654,12 +1874,12 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     return ts>=weekStart();
   }
   // points are kept as a log; weekly / monthly / yearly totals are worked out from it automatically
-  function computeRating(p){
+  function computeRating(p,skip){
     var cl=[], cm={}, st=[], sm={};
     CLASSES.forEach(function(c){ var o={n:c.n,g:c.g,k:0,sc:0}; cl.push(o); cm[c.n]=o; });
     STUDENTS.forEach(function(s){ if(!cm[s.n]) return; var o={id:s.id,name:s.name,n:s.n,sc:0}; st.push(o); sm[s.id]=o; cm[s.n].k++; });
     PTS.forEach(function(e){
-      if(!inPeriod(e.ts,p)) return;
+      if(!inPeriod(e.ts,p)||(skip&&e.ts===skip)) return;
       if(e.t==='s'){ var s=sm[e.ref]; if(s){ s.sc+=e.v; cm[s.n].sc+=e.v; } }
       else if(cm[e.ref]) cm[e.ref].sc+=e.v;
     });
@@ -1730,15 +1950,23 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     $('#myRes').innerHTML=myHtml;
     $('#rankHead').innerHTML=isS?thr(["O'quvchi",'Sinf','Ball'])
       :thr(['Sinf',"O'quvchilar soni",'Ball']);
+    var mx=PTS.reduce(function(m,e){return Math.max(m,e.ts||0)},0), pm={}, TAG=['Chempion','Zabardast','Yulduz'];
+    if(mx&&inPeriod(mx,rs.p)){
+      var pd=computeRating(rs.p,mx), pl=isS?pd.students:pd.classes, k0=isS?'id':'n', c0={};
+      pl.forEach(function(x){ c0[x[k0]]=x; });
+      ranked(list.map(function(x){ return {k:x[k0],name:isS?x.name:x.n,sc:c0[x[k0]]?c0[x[k0]].sc:0}; }),'name').forEach(function(x){ pm[x.k]=x; });
+    }
+    function mvOf(c){ var p=pm[isS?c.id:c.n]; if(!p) return ''; var d=p.r-c.r, dp=Math.round((c.sc-p.sc)*10)/10; if(!d&&!dp) return ''; return '<span class="mv">'+delta(d)+(dp?'<small class="'+(dp>0?'up':'down')+'">'+(dp>0?'+':'')+fmtPts(dp)+'</small>':'')+'</span>'; }
+    function tagOf(c){ return (c.sc>0&&c.r<=3)?'<span class="tag t'+c.r+'">'+tr(TAG[c.r-1])+'</span>':''; }
     var top=list.slice(0,3), show=list.length&&list[0].sc>0;
     var order=[[top[1],2],[top[0],1],[top[2],3]].filter(function(x){return x[0]&&x[0].sc>0});
     $('#podium').innerHTML=show?order.map(function(x){
       var c=x[0],r=x[1];
-      return '<div class="pod r'+r+'">'+(r===1?ic('crown','crown'):'')+'<span class="medal">'+r+'</span><span class="cls'+(isS?' nm':'')+'">'+esc(isS?c.name:c.n)+'</span><span class="pts">'+(isS?esc(c.n)+' · ':'')+fmtPts(c.sc)+' '+tr('ball')+'</span></div>';
+      return '<div class="pod r'+r+'">'+(r===1?ic('crown','crown'):'')+'<span class="medal">'+r+'</span><span class="cls'+(isS?' nm':'')+'">'+esc(isS?c.name:c.n)+'</span><span class="pts">'+(isS?esc(c.n)+' · ':'')+fmtPts(c.sc)+' '+tr('ball')+'</span>'+tagOf(c)+mvOf(c)+'</div>';
     }).join(''):'';
     function isMe(c){ return isS?(meR&&c.id===meR.id):sameCls(c.n,myK()); }
     function row(c){
-      return '<tr'+(isMe(c)?' class="me"':'')+'><td>'+c.r+'</td>'+(isS?'<td>'+esc(c.name)+'</td><td>'+esc(c.n)+'</td>':'<td>'+esc(c.n)+'</td><td>'+c.k+'</td>')+'<td>'+fmtPts(c.sc)+'</td></tr>';
+      var tp=(c.sc>0&&c.r<=3)?' t'+c.r:''; return '<tr class="'+(isMe(c)?'me':'')+tp+'"><td><span class="rk">'+c.r+'</span>'+mvOf(c)+'</td>'+(isS?'<td>'+esc(c.name)+tagOf(c)+'</td><td>'+esc(c.n)+'</td>':'<td>'+esc(c.n)+tagOf(c)+'</td><td>'+c.k+'</td>')+'<td>'+fmtPts(c.sc)+'</td></tr>';
     }
     var rows=rs.all?list:list.slice(0,7), html=rows.map(row).join('');
     if(!rs.all){
@@ -1758,10 +1986,10 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   /* ---------- FAQ ---------- */
   function renderFaq(){
     var q=$('#faqQ').value.trim().toLowerCase();
-    var FL=FAQ.map(function(f,i){ var x=lang!=='uz'&&FT[i]&&FT[i][lang]; return x?{q:x[0],a:x[1]}:f; });
+    var FL=faqItems().map(function(it){ var x=(it.t[lang]&&it.t[lang][0])?it.t[lang]:it.t.uz; return {q:x[0],a:x[1]}; });
     var r=FL.filter(function(f){return !q||(f.q+' '+f.a).toLowerCase().indexOf(q)>-1});
     $('#faqList').innerHTML=r.length?r.map(function(f,i){
-      return '<div class="qa"><button type="button" class="q" data-qa="qa'+i+'" aria-expanded="false" aria-controls="qa'+i+'"><span class="tile">'+ic('help')+'</span><span>'+f.q+'</span>'+ic('right')+'</button><p class="ans" id="qa'+i+'" hidden>'+f.a+'</p></div>';
+      return '<div class="qa"><button type="button" class="q" data-qa="qa'+i+'" aria-expanded="false" aria-controls="qa'+i+'"><span class="tile">'+ic('help')+'</span><span>'+esc(f.q)+'</span>'+ic('right')+'</button><p class="ans" id="qa'+i+'" hidden>'+br(f.a)+'</p></div>';
     }).join(''):'<p class="empty">'+tr('Savol topilmadi. Pastdagi tugma orqali bizga yozing.')+'</p>';
   }
   $('#faqQ').addEventListener('input',renderFaq);
@@ -1770,7 +1998,25 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     if(!b.hidden) b.scrollIntoView({behavior:'smooth',block:'nearest'});
   });
 
-  /* ---------- Profile ---------- */
+  
+/* ---------- Theme toggle + profile photo viewer ---------- */
+  ICONS.sun='<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>';
+  ICONS.moon='<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>';
+  (function(){
+    var R=document.documentElement;
+    function now(){ return R.getAttribute('data-theme')||((window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'); }
+    function paint(){ var d=now()==='dark'; $('#themeIc').innerHTML=ic(d?'sun':'moon'); $('#themeBtn').setAttribute('aria-pressed',String(d)); }
+    $('#themeBtn').addEventListener('click',function(){ var t=now()==='dark'?'light':'dark'; R.setAttribute('data-theme',t); try{ localStorage.setItem('myschool-theme',t); }catch(e){} paint(); });
+    paint();
+  })();
+  $('#pfAv').addEventListener('click',function(e){
+    var im=e.target.closest('img'); if(!im) return;
+    var b=document.createElement('div'); b.id='phBox'; b.innerHTML='<img src="'+im.src+'" alt=""><button type="button" aria-label="Close">&times;</button>';
+    function close(){ b.remove(); document.removeEventListener('keydown',kd); } function kd(ev){ if(ev.key==='Escape') close(); }
+    b.addEventListener('click',close); document.addEventListener('keydown',kd); document.body.appendChild(b);
+  });
+
+/* ---------- Profile ---------- */
   var KEYS=['name','klass','school','dob','phone'], pendPhoto=null;
   function dobToIso(s){ var m=/^(\d{2})\.(\d{2})\.(\d{4})$/.exec(s||''); return m?m[3]+'-'+m[2]+'-'+m[1]:''; }
   function avHtml(u){ return u?'<img src="'+u+'" alt="">':ic('user'); }
@@ -1826,13 +2072,13 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   $('#pfPhoto').addEventListener('change',function(){
     if(GUEST){ this.value=''; guestBlock('profile'); return; }
     var f=this.files&&this.files[0]; this.value=''; if(!f) return;
-    readImg(f,400).then(function(u){ pendPhoto=u; showAvatars(u); }).catch(function(){ toast("Rasmni o'qib bo'lmadi"); });
+    readImg(f,900).then(function(u){ pendPhoto=u; showAvatars(u); }).catch(function(){ toast("Rasmni o'qib bo'lmadi"); });
   });
   $('#pfPhotoRm').addEventListener('click',function(){ pendPhoto=''; showAvatars(''); });
 
   /* ---------- Admin: content ---------- */
   var BASE_NEWS=NEWS.slice(), BASE_EVENTS=EVENTS.slice(), BASE_INITS=INITS.slice(), BASE_CLASSES=JSON.parse(JSON.stringify(CLASSES));
-  var store={news:[],events:[],inits:[],classes:null,heroes:[],students:[],pts:[]}, hasLocal=false, cur='news';
+  var store={news:[],events:[],inits:[],classes:null,heroes:[],students:[],pts:[],faq:null,heroText:{}}, hasLocal=false, cur='news';
   var MONTHS=['yanvar','fevral','mart','aprel','may','iyun','iyul','avgust','sentabr','oktabr','noyabr','dekabr'];
   var CFG={
     news:{list:'Siz joylagan yangiliklar',ph:"Masalan: Bahor festivali o'tkazildi",cats:null,month:false,date:false},
@@ -1849,9 +2095,10 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
       var cat=String(x.cat||''); cat=cats?(cats.indexOf(cat)>-1?cat:cats[0]):'';
       var mo=String(x.month||''); mo=CFG[type].month?(MONTHS.indexOf(mo)>-1?mo:MONTHS[new Date().getMonth()]):'';
       return {id:x.id,ts:+x.ts||0,date:String(x.date||''),cat:cat,month:mo,title:String(x.title),text:String(x.text||''),more:String(x.more||''),
-        imgs:(Array.isArray(x.imgs)?x.imgs:[]).filter(function(u){return typeof u==='string'&&u.indexOf('data:image/')===0}).slice(0,4)};
+        link:cleanLink(x.link),imgs:(Array.isArray(x.imgs)?x.imgs:[]).filter(function(u){return typeof u==='string'&&u.indexOf('data:image/')===0}).slice(0,6)};
     });
   }
+  function cleanLink(u){ u=String(u||'').trim(); return /^https?:\/\/[^\s]+$/i.test(u)?u.slice(0,300):''; }
   function num(v,lo,hi,def){ v=parseFloat(v); if(isNaN(v)) v=def; return Math.min(hi,Math.max(lo,v)); }
   function cleanClasses(a){
     if(!Array.isArray(a)) return null;
@@ -1873,10 +2120,20 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     var a=Array.isArray(d.heroes)?d.heroes:(typeof d.hero==='string'&&d.hero?[d.hero]:[]); // older files held one picture in "hero"
     return a.filter(function(u){return typeof u==='string'&&u.indexOf('data:image/')===0}).slice(0,5);
   }
+  function cleanFaq(a){
+    if(!Array.isArray(a)) return null; var LL=['uz','ru','en','kk'];
+    return a.filter(function(x){return x&&typeof x.id==='string'&&x.t&&normArr(x.t.uz)[0]&&normArr(x.t.uz)[1]}).map(function(x){
+      var t={}; LL.forEach(function(l){ var v=normArr(x.t[l]); if(v[0]&&v[1]) t[l]=[String(v[0]).slice(0,200),String(v[1]).slice(0,2000)]; }); return {id:x.id.slice(0,28),t:t}; });
+  }
+  function cleanHT(o){
+    var r={}; if(!o||typeof o!=='object') return r;
+    ['uz','ru','en','kk'].forEach(function(l){ var v=o[l]; if(v&&typeof v==='object'){ var c={a:String(v.a||'').slice(0,80),b:String(v.b||'').slice(0,80),p:String(v.p||'').slice(0,160)}; if(c.a||c.b||c.p) r[l]=c; } });
+    return r;
+  }
   function cleanStore(d){
     if(Array.isArray(d)) d={news:d}; // older news.json held only news
     d=d||{};
-    return {news:cleanList(d.news,'news'),events:cleanList(d.events,'events'),inits:cleanList(d.inits,'inits'),classes:cleanClasses(d.classes),heroes:cleanHeroes(d),students:cleanStudents(d.students),pts:cleanPts(d.pts)};
+    return {news:cleanList(d.news,'news'),events:cleanList(d.events,'events'),inits:cleanList(d.inits,'inits'),classes:cleanClasses(d.classes),heroes:cleanHeroes(d),students:cleanStudents(d.students),pts:cleanPts(d.pts),faq:cleanFaq(d.faq),heroText:cleanHT(d.heroText)};
   }
   try{ var lp=localStorage.getItem('myschool-posts'); if(lp!==null){ store=cleanStore(JSON.parse(lp)); hasLocal=true; } }catch(e){}
   function savePosts(){
@@ -1897,15 +2154,15 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   function byNew(a,b){return b.ts-a.ts}
   function rebuildAll(){
     NEWS=store.news.slice().sort(byNew).map(function(p){
-      return {id:'p'+p.id,theme:'school',icon:'news',date:p.date,title:esc(p.title),text:esc(p.text),more:br(p.more),imgs:p.imgs};
+      return {id:'p'+p.id,theme:'school',icon:'news',date:p.date,title:esc(p.title),text:esc(p.text),more:br(p.more),imgs:p.imgs,link:p.link};
     }).concat(BASE_NEWS);
     EVENTS=store.events.slice().sort(byNew).map(function(p){
       var c=EVCAT[p.cat]||EVCAT.Sport;
-      return {id:'pe'+p.id,cat:p.cat,cls:c.cls,theme:c.theme,icon:c.icon,month:p.month,title:esc(p.title),date:esc(p.date),text:esc(p.text),more:br(p.more),imgs:p.imgs};
+      return {id:'pe'+p.id,cat:p.cat,cls:c.cls,theme:c.theme,icon:c.icon,month:p.month,title:esc(p.title),date:esc(p.date),text:esc(p.text),more:br(p.more),imgs:p.imgs,link:p.link};
     }).concat(BASE_EVENTS).sort(function(a,b){return MONTHS.indexOf(a.month)-MONTHS.indexOf(b.month)});
     INITS=store.inits.slice().sort(byNew).map(function(p){
       var c=ITCAT[p.cat]||ITCAT.Loyiha;
-      return {id:'pt'+p.id,cat:p.cat,cls:c.cls,theme:c.theme,icon:c.icon,title:esc(p.title),when:esc(p.date),text:esc(p.text),more:br(p.more),imgs:p.imgs};
+      return {id:'pt'+p.id,cat:p.cat,cls:c.cls,theme:c.theme,icon:c.icon,title:esc(p.title),when:esc(p.date),text:esc(p.text),more:br(p.more),imgs:p.imgs,link:p.link};
     }).concat(BASE_INITS);
     if(hasLocal) contentLoaded=true;
     if(contentLoaded) purgeApps();
@@ -1915,7 +2172,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     sel.innerHTML='<option value="all">'+tr('Barcha sana')+'</option>'+ms.map(function(m){return '<option value="'+m+'">'+mName(m)+'</option>'}).join('');
     sel.value=(keep==='all'||ms.indexOf(keep)>-1)?keep:'all';
     CLASSES=store.classes||BASE_CLASSES; STUDENTS=store.students; PTS=store.pts; applyHero();
-    renderNews(); renderEvents(); renderInits(); renderRating(); renderAdmin(); renderNotes();
+    renderNews(); renderEvents(); renderInits(); renderRating(); renderAdmin(); renderNotes(); renderFaq();
   }
   // without Firebase, visitors get the published content from news.json (unless this browser has its own copy)
   function loadNewsJson(){
@@ -1935,6 +2192,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     }).join('');
   }
   function renderAdmin(){
+    if(cur==='faq') return renderFaqEditor();
     if(cur==='users') return renderUsers();
     if(cur==='rating') return renderRatingEditor();
     if(cur==='hero') return renderHeroEditor();
@@ -1947,7 +2205,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   }
   function resetDraft(){
     draft={editId:null,imgs:[]};
-    ['#aTitle','#aText','#aMore','#aDate'].forEach(function(k){ $(k).value=''; });
+    ['#aTitle','#aText','#aMore','#aDate','#aLink'].forEach(function(k){ $(k).value=''; });
     $('#aImgs').value=''; $('#aSave').textContent='Joylash'; $('#aCancel').hidden=true; renderThumbs();
   }
   function applyType(){
@@ -1955,6 +2213,11 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
       $('#aForm').hidden=true; $('#aListTitle').textContent='Bosh sahifa rasmi';
       $$('#aTabs button').forEach(function(b){ b.setAttribute('aria-pressed',String(b.getAttribute('data-atype')===cur)); });
       renderHeroEditor(); return;
+    }
+    if(cur==='faq'){
+      $('#aForm').hidden=true; $('#aListTitle').textContent='Savollar';
+      $$('#aTabs button').forEach(function(b){ b.setAttribute('aria-pressed',String(b.getAttribute('data-atype')===cur)); });
+      renderFaqEditor(); return;
     }
     if(cur==='users'){
       $('#aForm').hidden=true; $('#aListTitle').textContent="Ro'yxatdan o'tgan foydalanuvchilar";
@@ -1970,7 +2233,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     var c=CFG[cur];
     $('#aTitle').placeholder=c.ph;
     $('#aCatRow').hidden=!c.cats; $('#aMonthRow').hidden=!c.month; $('#aDateRow').hidden=!c.date;
-    if(c.cats) $('#aCat').innerHTML=c.cats.map(function(x){return '<option>'+x+'</option>'}).join('');
+    if(c.cats) $('#aCat').innerHTML=c.cats.map(function(x){return '<option value="'+x+'">'+x+'</option>'}).join('');
     if(c.date){ $('#aDateLbl').textContent=c.dateLbl; $('#aDate').placeholder=c.datePh; }
     $('#aListTitle').textContent=c.list;
     $$('#aTabs button').forEach(function(b){ b.setAttribute('aria-pressed',String(b.getAttribute('data-atype')===cur)); });
@@ -1998,8 +2261,8 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     });
   }
   $('#aImgs').addEventListener('change',function(){
-    var files=Array.prototype.slice.call(this.files).slice(0,4-draft.imgs.length);
-    if(!files.length){ toast("Eng ko'pi bilan 4 ta rasm"); return; }
+    var files=Array.prototype.slice.call(this.files).slice(0,6-draft.imgs.length);
+    if(!files.length){ toast("Eng ko'pi bilan 6 ta rasm"); return; }
     Promise.all(files.map(readImg)).then(function(r){ draft.imgs=draft.imgs.concat(r); renderThumbs(); })
       .catch(function(){ toast("Rasmni o'qib bo'lmadi"); });
     this.value='';
@@ -2012,14 +2275,15 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     var c=CFG[cur], title=$('#aTitle').value.trim(), more=$('#aMore').value.trim(), text=$('#aText').value.trim(), date=$('#aDate').value.trim();
     if(!title||!more){ toast("Sarlavha va to'liq matnni yozing"); return; }
     if(c.date&&!date){ toast('Sana yoki jadvalni yozing'); return; }
+    var rawL=$('#aLink').value.trim(), link=cleanLink(rawL); if(rawL&&!link){ toast("Havola noto'g'ri. https:// bilan boshlang"); return; }
     if(!text) text=more.length>140?more.slice(0,137)+'...':more;
     var cat=c.cats?$('#aCat').value:'', month=c.month?$('#aMonth').value:'';
     var prev=JSON.stringify(store), editing=draft.editId, arr=store[cur];
     if(editing){
-      arr.forEach(function(p){ if(p.id===editing){ p.title=title; p.text=text; p.more=more; p.imgs=draft.imgs.slice(); p.cat=cat; p.month=month; if(c.date) p.date=date; } });
+      arr.forEach(function(p){ if(p.id===editing){ p.title=title; p.text=text; p.more=more; p.imgs=draft.imgs.slice(); p.link=link; p.cat=cat; p.month=month; if(c.date) p.date=date; } });
     }else{
       var now=new Date();
-      arr.unshift({id:now.getTime().toString(36),ts:now.getTime(),date:c.date?date:fmtDate(now),cat:cat,month:month,title:title,text:text,more:more,imgs:draft.imgs.slice()});
+      arr.unshift({id:now.getTime().toString(36),ts:now.getTime(),date:c.date?date:fmtDate(now),cat:cat,month:month,title:title,text:text,more:more,imgs:draft.imgs.slice(),link:link});
     }
     if(!savePosts()){ store=JSON.parse(prev); toast("Xotira to'ldi. Rasmlarni kamaytiring."); return; }
     rebuildAll(); resetDraft();
@@ -2031,13 +2295,13 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     if(ed){
       var p=store[cur].filter(function(x){return x.id===ed.getAttribute('data-aedit')})[0]; if(!p) return;
       draft={editId:p.id,imgs:p.imgs.slice()};
-      $('#aTitle').value=p.title; $('#aText').value=p.text; $('#aMore').value=p.more; $('#aDate').value=CFG[cur].date?p.date:'';
+      $('#aTitle').value=p.title; $('#aLink').value=p.link||''; $('#aText').value=p.text; $('#aMore').value=p.more; $('#aDate').value=CFG[cur].date?p.date:'';
       if(CFG[cur].cats) $('#aCat').value=p.cat;
       if(CFG[cur].month) $('#aMonth').value=p.month;
       $('#aSave').textContent='Yangilash'; $('#aCancel').hidden=false; renderThumbs();
       $('#aTitle').scrollIntoView({behavior:'smooth',block:'center'}); $('#aTitle').focus();
     }else if(dl){
-      if(!window.confirm("Buni o'chirasizmi?")) return;
+      if(!confirm("Buni o'chirasizmi?")) return;
       var id=dl.getAttribute('data-adel');
       store[cur]=store[cur].filter(function(x){return x.id!==id}); savePosts();
       if(cur==='events'||cur==='inits'){ var eid=(cur==='inits'?'pt':'pe')+id; DB.list().then(function(arr){ arr.filter(function(a){return a.evId===eid}).forEach(function(a){ DB.remove(a.id).catch(function(){}); }); }).catch(function(){}); }
@@ -2061,7 +2325,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
      Everyone reads it; only the admin Google account may write it (see the Realtime Database rules). ---------- */
   function normArr(v){ if(Array.isArray(v)) return v; if(v&&typeof v==='object') return Object.keys(v).sort(function(a,b){return a-b}).map(function(k){return v[k]}); return []; }
   function fromRemote(d){
-    var o={news:normArr(d.news),events:normArr(d.events),inits:normArr(d.inits),classes:d.classes?normArr(d.classes):null,heroes:normArr(d.heroes),students:normArr(d.students),pts:normArr(d.pts)};
+    var o={news:normArr(d.news),events:normArr(d.events),inits:normArr(d.inits),classes:d.classes?normArr(d.classes):null,heroes:normArr(d.heroes),students:normArr(d.students),pts:normArr(d.pts),faq:d.faq?normArr(d.faq):null,heroText:(d.heroText&&typeof d.heroText==='object')?d.heroText:{}};
     ['news','events','inits'].forEach(function(k){ o[k].forEach(function(x){ if(x&&typeof x==='object'&&x.imgs) x.imgs=normArr(x.imgs); }); });
     return o;
   }
@@ -2167,8 +2431,8 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     if(GUEST||isAdmin){ guestBlock(isAdmin?'admin':'apply'); return; }
     apKind=kind; apEv=(kind==='init'?INITS:EVENTS).filter(function(x){return x.id===id})[0]; if(!apEv) return;
     $('#apEv').textContent=plain(apEv.title);
-    $('#apName').value=profile.name==='Foydalanuvchi'?'':profile.name; $('#apKlass').value=profile.klass; $('#apPhone').value=profile.phone||''; $('#apNote').value='';
-    $('#apModal').hidden=false; $('#apName').focus();
+    $('#apName').value=profile.name==='Foydalanuvchi'?'':profile.name; $('#apKlass').value=profile.klass; $('#apPhone').value=profile.phone||''; $('#apNote').value=''; ['#apName','#apKlass','#apPhone'].forEach(function(s){ $(s).readOnly=true; });
+    $('#apModal').hidden=false; $('#apNote').focus();
   }
   $('#evBox').addEventListener('click',function(e){ var b=e.target.closest('[data-apply]'); if(b) openApply('event',b.getAttribute('data-apply')); });
   $('#tbBox').addEventListener('click',function(e){ var b=e.target.closest('[data-apply]'); if(b) openApply('init',b.getAttribute('data-apply')); });
@@ -2245,9 +2509,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
         :'<p class="hint">Bu sinfda hali o\'quvchi yo\'q. Pastdagi “O\'quvchilar va sinflar” bo\'limidan qo\'shing.</p>')+'</div>';
     var roster='<div class="card adm"><b>O\'quvchilar va sinflar</b>'+
       '<div class="re-grid"><label>Yangi sinf<input class="field" id="reNewCls" maxlength="6" autocomplete="off" placeholder="Masalan: 9-V"></label><div class="adm-btns" style="align-items:flex-end"><button type="button" class="btn ghost small" id="reAddC">Sinf qo\'shish</button></div></div>'+
-      '<label>Sinf<select class="field" id="reAddCls">'+clsOpts(re.addCls)+'</select></label>'+
-      '<label>O\'quvchilar (har qatorga bitta ism)<textarea class="field" id="reNames" rows="4" placeholder="Aliyev Vali&#10;Karimova Madina"></textarea></label>'+
-      '<div class="adm-btns"><button type="button" class="btn small" id="reAddS">O\'quvchilarni qo\'shish</button></div>'+
+      '<b>Ro\'yxatdan o\'tgan foydalanuvchilardan qo\'shing</b><p class="hint">Foydalanuvchi o\'z sinfiga avtomatik qo\'shiladi. Ismni yozish shart emas.</p><input class="field" id="ruQ" type="search" placeholder="Ism bo\'yicha qidirish..." autocomplete="off"><div id="ruBox"><p class="hint">Yuklanmoqda...</p></div>'+
       CLASSES.map(function(c){
         var ss=STUDENTS.filter(function(s){return s.n===c.n}).sort(function(a,b){return a.name.localeCompare(b.name)});
         return '<details class="ros"><summary><span>'+esc(c.n)+' · '+ss.length+' o\'quvchi</span><button type="button" class="pill" data-delcls="'+esc(c.n)+'">Sinfni o\'chirish</button></summary>'+
@@ -2258,15 +2520,24 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
       var d=new Date(e.ts), who=e.t==='s'?stName(e.ref)+' ('+((STUDENTS.filter(function(s){return s.id===e.ref})[0]||{}).n||'')+')':e.ref+' sinfi';
       return '<div class="arow" style="padding:8px 0"><div><b>'+esc(who)+' · '+(e.v>0?'+':'')+fmtPts(e.v)+'</b><span class="date">'+d.getDate()+'-'+MONTHS[d.getMonth()]+(e.note?' · '+esc(e.note):'')+'</span></div><div class="act"><button type="button" class="pill" data-undo="'+e.id+'">Bekor qilish</button></div></div>';
     }).join(''):'<p class="hint">Hali ball berilmagan.</p>')+'</div>';
-    $('#aList').innerHTML=award+bulk+roster+log;
+    $('#aList').innerHTML=award+bulk+roster+log; ruList.length?ruDraw():loadRU();
   }
+
+  var ruList=[];
+  function ruDraw(){
+    var b=$('#ruBox'); if(!b) return; var q=normName(($('#ruQ')||{}).value);
+    var inR=function(u){ return STUDENTS.some(function(s){return normName(s.name)===normName(u.name)&&sameCls(s.n,u.klass)}); };
+    var a=ruList.filter(function(u){ return u.name&&(!q||normName(u.name+' '+(u.klass||'')).indexOf(q)>-1); }).sort(function(x,y){return x.name.localeCompare(y.name)}).slice(0,40);
+    b.innerHTML=a.length?a.map(function(u){ return '<div class="bk-row"><span>'+esc(u.name)+(u.klass?' · '+esc(u.klass):'')+'</span>'+(inR(u)?'<span class="hint">Reytingda</span>':'<button type="button" class="pill solid" data-ruadd="'+ruList.indexOf(u)+'">Reytingga qo\'shish</button>')+'</div>'; }).join(''):'<p class="hint">Hech kim topilmadi.</p>';
+  }
+  function loadRU(){ usersList().then(function(a){ ruList=a; ruDraw(); }).catch(function(){ var b=$('#ruBox'); if(b) b.innerHTML='<p class="hint">Ro\'yxatni yuklab bo\'lmadi. Firebase qoidalarini tekshiring.</p>'; }); }
   function addEntries(list,msg){
     rmut(function(){ var ts=Date.now(); list.forEach(function(x,i){ store.pts.push({id:uid()+i,ts:ts,t:x.t,ref:x.ref,v:x.v,note:x.note}); }); },msg);
   }
   function numOf(v){ v=parseFloat(String(v).replace(',','.')); return isFinite(v)?Math.max(-1000,Math.min(1000,Math.round(v*10)/10)):0; }
   $('#aList').addEventListener('input',function(e){
     if(cur!=='rating') return; var t=e.target;
-    if(t.id==='rePts') re.pts=t.value; else if(t.id==='reNote') re.note=t.value; else if(t.id==='reBkNote') re.bkNote=t.value;
+    if(t.id==='ruQ') ruDraw(); else if(t.id==='rePts') re.pts=t.value; else if(t.id==='reNote') re.note=t.value; else if(t.id==='reBkNote') re.bkNote=t.value;
   });
   $('#aList').addEventListener('change',function(e){
     if(cur!=='rating') return; var t=e.target;
@@ -2278,7 +2549,13 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   });
   $('#aList').addEventListener('click',function(e){
     if(cur!=='rating') return; var t=e.target;
-    var m=t.closest('[data-rem]'), q=t.closest('[data-rq]'), dc=t.closest('[data-delcls]'), ds=t.closest('[data-delst]'), un=t.closest('[data-undo]');
+    var m=t.closest('[data-rem]'), q=t.closest('[data-rq]'), dc=t.closest('[data-delcls]'), ds=t.closest('[data-delst]'), un=t.closest('[data-undo]'), ra=t.closest('[data-ruadd]');
+    if(ra){
+      var ru=ruList[+ra.getAttribute('data-ruadd')]; if(!ru) return;
+      var rn=String(ru.klass||'').replace(/\s+/g,'').toUpperCase().slice(0,6); if(!rn){ toast('Sinf ko\'rsatilmagan'); return; }
+      var rex=CLASSES.filter(function(c){return sameCls(c.n,rn)})[0]; if(rex) rn=rex.n;
+      rmut(function(){ if(!rex) rosterEdit().push({n:rn,g:parseInt(rn)||0}); store.students.push({id:uid(),name:ru.name.slice(0,40),n:rn}); },ru.name+': Reytingga qo\'shildi'); return;
+    }
     if(m){ re.mode=m.getAttribute('data-rem'); renderRatingEditor(); return; }
     if(q){ re.pts=q.getAttribute('data-rq'); $('#rePts').value=re.pts; return; }
     if(un){ var id=un.getAttribute('data-undo'); rmut(function(){ store.pts=store.pts.filter(function(x){return x.id!==id}); },'Ball bekor qilindi'); return; }
@@ -2335,22 +2612,24 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     return ensureToken().then(function(){ return fetch(FB.url+'/users.json?auth='+token); }).then(okj).then(function(d){ d=d||{}; return Object.keys(d).map(function(k){return d[k]}); });
   }
   function fmtTs(t){ if(!t) return '—'; var d=new Date(t); return d.getDate()+'-'+MONTHS[d.getMonth()]+' '+d.getFullYear()+', '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2); }
+  var dupCount={}, uQ='';
+  function dupKey(u){ if(!u.name) return ''; var ph=String(u.phone||'').replace(/\D/g,''); return normName(u.name)+'|'+(ph||u.dob||'-'); }
   function userCard(u){
-    return '<div class="card arow"><div><b>'+esc(u.name||'—')+(u.klass?' · '+esc(u.klass):'')+'</b>'+
+    return '<div class="card arow"><div><b>'+esc(u.name||'—')+(u.klass?' · '+esc(u.klass):'')+'</b>'+(u.banned?' <span class="stat rejected">Bloklangan</span>':'')+(dupCount[dupKey(u)]>1?' <span class="stat pending">Takroriy ma\'lumot</span>':'')+
       '<span class="date">Maktab: '+esc(u.school||'—')+'</span>'+
       '<span class="date">Tug\'ilgan sana: '+esc(u.dob||'—')+'</span>'+
       '<span class="date">Telefon: '+esc(u.phone||'—')+'</span>'+
       '<span class="date">Google email: '+esc(u.email||'—')+'</span>'+
       '<span class="date">Ro\'yxatdan o\'tgan: '+fmtTs(u.ts)+' · Oxirgi kirish: '+fmtTs(u.lastLogin)+'</span></div>'+
-      (FB.url&&u.uid?'<div class="act"><button type="button" class="pill" data-udel="'+esc(u.uid)+'">O\'chirish</button></div>':'')+'</div>';
+      (u.uid?'<div class="act"><button type="button" class="pill'+(u.banned?'':' solid')+'" data-uban="'+esc(u.uid)+'">'+(u.banned?'Blokdan chiqarish':'Bloklash')+'</button>'+(FB.url?'<button type="button" class="pill" data-udel="'+esc(u.uid)+'">O\'chirish</button>':'')+'</div>':'')+'</div>';
   }
   function renderUsers(){
     var l=$('#aList'), note=FB.url?'':'<p class="hint">Demo rejim: foydalanuvchilar faqat shu brauzerda ko\'rinadi. Hammasini ko\'rish uchun Firebase ulang.</p>';
     l.innerHTML=note+'<p class="card empty">Yuklanmoqda...</p>';
     usersList().then(function(arr){
-      arr.sort(function(a,b){return (b.ts||0)-(a.ts||0)}); usersCache=arr;
+      arr.sort(function(a,b){return (b.ts||0)-(a.ts||0)}); usersCache=arr; dupCount={}; arr.forEach(function(u){ var k=dupKey(u); if(k) dupCount[k]=(dupCount[k]||0)+1; });
       l.innerHTML=note+'<div class="card arow"><div><b>'+arr.length+' ta ro\'yxatdan o\'tgan foydalanuvchi</b></div><div class="act"><button type="button" class="pill" id="uExport">CSV yuklab olish</button></div></div>'+
-        (arr.length?arr.map(userCard).join(''):'<p class="card empty">Hali hech kim ro\'yxatdan o\'tmagan.</p>');
+        (arr.length?'<input class="field" id="uQ" type="search" placeholder="Foydalanuvchini qidirish..." autocomplete="off" value="'+esc(uQ)+'" style="margin:10px 0"><div id="uBox" style="display:grid;gap:10px"></div>':'<p class="card empty">Hali hech kim ro\'yxatdan o\'tmagan.</p>'); drawUsers();
     }).catch(function(){ token=''; l.innerHTML=note+'<p class="card empty">Ro\'yxatni yuklab bo\'lmadi. Firebase Realtime Database qoidalarida (Rules) admin emailingizga o\'qishga ruxsat bering.</p><div class="adm-btns"><button type="button" class="btn small" data-ulogin>Qayta urinish</button></div>'; });
   }
   function exportUsers(){
@@ -2367,11 +2646,28 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     if(e.target.closest('[data-ulogin]')){ renderUsers(); return; }
     if(e.target.closest('#uExport')) exportUsers();
     var d=e.target.closest('[data-udel]'); if(d) deleteUser(d.getAttribute('data-udel'));
+    var bb=e.target.closest('[data-uban]');
+    if(bb){
+      var bid=bb.getAttribute('data-uban'), bu=usersCache.filter(function(x){return x.uid===bid})[0]; if(!bu) return; var on=!bu.banned;
+      if(on&&!confirm("Bu foydalanuvchi bloklansinmi? U saytga kira olmaydi.")) return;
+      setBan(bid,on).then(function(){ bu.banned=on; drawUsers(); toast(on?'Bloklandi':'Blokdan chiqarildi'); }).catch(function(){ token=''; toast("Saqlab bo'lmadi. Firebase qoidalarini tekshiring."); });
+    }
   });
+  function drawUsers(){
+    var b=$('#uBox'); if(!b) return; var q=normName(uQ);
+    var a=usersCache.filter(function(u){ return !q||normName([u.name,u.klass,u.school,u.phone,String(u.phone||'').replace(/\D/g,''),u.email,u.dob].join(' ')).indexOf(q)>-1; });
+    b.innerHTML=a.length?a.map(function(u){return userCard(u)}).join(''):'<p class="card empty">Hech kim topilmadi.</p>';
+  }
+  function setBan(id,on){
+    if(!FB.url){ var m=lsGet('myschool-users'); if(m[id]) m[id].banned=on; lsSet('myschool-users',m); return Promise.resolve(); }
+    return ensureToken().then(function(){ return fetch(FB.url+'/users/'+encodeURIComponent(id)+'.json?auth='+token,{method:'PATCH',body:JSON.stringify({banned:on})}); }).then(okj);
+  }
+  $('#aList').addEventListener('input',function(e){ if(cur==='users'&&e.target.id==='uQ'){ uQ=e.target.value; drawUsers(); } });
+  (function(){})();
   /* Deleting an account removes its record and frees its phone number; the person must register again at their next login. */
   function deleteUser(uid){
     var rec=usersCache.filter(function(x){return x.uid===uid})[0]||{};
-    if(!window.confirm((rec.name||rec.email||'Bu foydalanuvchi')+" hisobi o'chirilsinmi?\nU keyingi kirishda qaytadan ro'yxatdan o'tishi kerak bo'ladi.")) return;
+    if(!confirm((rec.name||rec.email||'Bu foydalanuvchi')+" hisobi o'chirilsinmi?\nU keyingi kirishda qaytadan ro'yxatdan o'tishi kerak bo'ladi.")) return;
     ensureToken().then(function(t){
       if(!t) throw new Error('auth');
       var ph=window.uzPhone(rec.phone||'');
@@ -2382,6 +2678,51 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
       });
     }).then(function(){ toast("Hisob o'chirildi"); renderUsers(); })
       .catch(function(){ toast("O'chirib bo'lmadi. Firebase qoidalarini tekshiring."); });
+  }
+
+
+/* ---------- Admin: questions (FAQ) editor ---------- */
+  function baseFaq(){ return FAQ.map(function(f,i){ var t={uz:[f.q,f.a]}; ['ru','en','kk'].forEach(function(l){ var x=FT[i]&&FT[i][l]; if(x) t[l]=x; }); return {id:'d'+i,t:t}; }); }
+  function faqItems(){ return Array.isArray(store.faq)?store.faq:baseFaq(); }
+  var fe={id:null,t:{}};
+  function renderFaqEditor(){
+    var form='<div class="card adm"><b>'+(fe.id?'Yangilash':"Savol qo'shish")+'</b><p class="hint">Boshqa tillar bo\'sh qolsa, o\'zbekcha matn ko\'rinadi.</p>'+
+      LANG_LIST.map(function(l){ var v=fe.t[l[0]]||['','']; return '<b>'+l[1]+'</b><label>Savol<input class="field" data-fq="'+l[0]+'.0" maxlength="200" value="'+esc(v[0])+'"></label><label>Javob<textarea class="field" rows="3" data-fq="'+l[0]+'.1" maxlength="2000">'+esc(v[1])+'</textarea></label>'; }).join('')+
+      '<div class="adm-btns"><button type="button" class="btn" id="fqSave">'+(fe.id?'Yangilash':'Joylash')+'</button>'+(fe.id?'<button type="button" class="btn ghost" id="fqCancel">Bekor qilish</button>':'')+'<button type="button" class="btn ghost" id="fqReset">Standart savollarga qaytish</button></div></div>';
+    $('#aList').innerHTML=form+faqItems().map(function(it){ return '<div class="card arow"><div><b>'+esc(it.t.uz[0])+'</b></div><div class="act"><button type="button" class="pill" data-fqe="'+esc(it.id)+'">Tahrirlash</button><button type="button" class="pill" data-fqd="'+esc(it.id)+'">O\'chirish</button></div></div>'; }).join('');
+  }
+  function fqRead(){ var t={}; $$('#aList [data-fq]').forEach(function(i){ var k=i.getAttribute('data-fq').split('.'); (t[k[0]]=t[k[0]]||['',''])[+k[1]]=i.value.trim(); }); return t; }
+  function faqMut(fn,msg){ rmut(function(){ store.faq=fn(JSON.parse(JSON.stringify(faqItems()))); },msg); }
+  $('#aList').addEventListener('click',function(e){
+    if(cur!=='faq') return; var t=e.target, b;
+    if((b=t.closest('[data-fqe]'))){ var it=faqItems().filter(function(x){return x.id===b.getAttribute('data-fqe')})[0]; if(it){ fe={id:it.id,t:JSON.parse(JSON.stringify(it.t))}; renderFaqEditor(); window.scrollTo(0,0); } return; }
+    if((b=t.closest('[data-fqd]'))){ if(!confirm("Buni o'chirasizmi?")) return; var did=b.getAttribute('data-fqd'); fe={id:null,t:{}}; faqMut(function(a){ return a.filter(function(x){return x.id!==did}); },"O'chirildi"); return; }
+    if(t.closest('#fqCancel')){ fe={id:null,t:{}}; renderFaqEditor(); return; }
+    if(t.closest('#fqReset')){ fe={id:null,t:{}}; rmut(function(){ store.faq=null; },'Standart savollar qaytarildi'); return; }
+    if(t.closest('#fqSave')){
+      var v=fqRead(); if(!v.uz||!v.uz[0]||!v.uz[1]){ toast("Savol va javobni kamida o'zbek tilida yozing"); return; }
+      var o={}; LANG_LIST.forEach(function(l){ var x=v[l[0]]; if(x&&x[0]&&x[1]) o[l[0]]=x; });
+      var id=fe.id; fe={id:null,t:{}};
+      faqMut(function(a){ if(id){ a.forEach(function(x){ if(x.id===id) x.t=o; }); } else a.unshift({id:uid(),t:o}); return a; },id?'Yangilandi':"Qo'shildi");
+    }
+  });
+
+/* ---------- Home page text editor ---------- */
+  var htDraft=null;
+  function grabHt(){ var o={}; $$('#aList [data-ht]').forEach(function(i){ var k=i.getAttribute('data-ht').split('.'); (o[k[0]]=o[k[0]]||{})[k[1]]=i.value.trim(); }); return o; }
+  function htCard(){
+    var t=htDraft||store.heroText||{};
+    return '<div class="card adm"><b>Bosh sahifa matni</b><p class="hint">Bosh sahifadagi shior va izohni o\'zgartiring. Bo\'sh qoldirilsa, standart matn ko\'rinadi.</p>'+
+      LANG_LIST.map(function(l){ var v=t[l[0]]||{}, k=l[0]; return '<b>'+l[1]+'</b><label>Shior (asosiy qism)<input class="field" data-ht="'+k+'.a" maxlength="80" value="'+esc(v.a||'')+'"></label><label>Shior (ajratilgan qism)<input class="field" data-ht="'+k+'.b" maxlength="80" value="'+esc(v.b||'')+'"></label><label>Izoh<input class="field" data-ht="'+k+'.p" maxlength="160" value="'+esc(v.p||'')+'"></label>'; }).join('')+
+      '<div class="adm-btns"><button type="button" class="btn" id="htSave">Saqlash</button><button type="button" class="btn ghost" id="htReset">Standart matnga qaytish</button></div></div>';
+  }
+  function applyHeroText(){
+    var h=$('.hero-copy h1:not(#heroH)'), p=$('.hero-copy p:not(#heroP)'), ch=$('#heroH'), cp=$('#heroP'), t=store.heroText||{};
+    if(!h||!p) return;
+    if(!ch){ ch=document.createElement('h1'); ch.id='heroH'; h.after(ch); cp=document.createElement('p'); cp.id='heroP'; ch.after(cp); }
+    var c=t[lang]||t.uz||null;
+    h.hidden=p.hidden=!!c; ch.hidden=cp.hidden=!c;
+    if(c){ ch.innerHTML=esc(c.a||'')+' <em>'+esc(c.b||'')+'</em>'; cp.textContent=c.p||''; }
   }
 
 /* ---------- Admin: main page pictures (slideshow, up to 5) ---------- */
@@ -2399,6 +2740,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     heroTimer=setInterval(function(){ goSlide(heroIdx+1); },4500);
   }
   function applyHero(){
+    applyHeroText();
     var list=store.heroes, box=$('#heroSlides'), sv=$('.hero-art');
     stopHero(); heroIdx=0;
     if(!list.length){ box.hidden=true; box.innerHTML=''; sv.style.display=''; return; }
@@ -2413,8 +2755,9 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   $('#heroSlides').addEventListener('mouseenter',stopHero);
   $('#heroSlides').addEventListener('mouseleave',startHero);
   function drawHeroEditor(){
+    if($('#aList [data-ht]')) htDraft=grabHt();
     var full=heroDraft.length>=HERO_MAX;
-    $('#aList').innerHTML='<div class="card adm"><p class="hint">Bosh sahifa uchun '+HERO_MAX+' tagacha rasm qo\'shing. Bir nechta bo\'lsa, ular o\'zi almashib turadi. Rasm bo\'lmasa, standart rasm ko\'rinadi.</p>'+
+    $('#aList').innerHTML=htCard()+'<div class="card adm"><p class="hint">Bosh sahifa uchun '+HERO_MAX+' tagacha rasm qo\'shing. Bir nechta bo\'lsa, ular o\'zi almashib turadi. Rasm bo\'lmasa, standart rasm ko\'rinadi.</p>'+
       '<div class="thumbs" id="hThumbs">'+heroDraft.map(function(u,i){
         return '<div class="thumb"><img src="'+u+'" alt=""><button type="button" data-hrm="'+i+'" aria-label="Rasmni olib tashlash">×</button></div>';
       }).join('')+'</div>'+
@@ -2431,6 +2774,13 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   });
   $('#aList').addEventListener('click',function(e){
     if(cur!=='hero') return;
+    var hs=e.target.closest('#htSave'), hr=e.target.closest('#htReset');
+    if(hs||hr){
+      var o=hs?grabHt():{}; if(hr) $$('#aList [data-ht]').forEach(function(i){ i.value=''; });
+      var prev0=JSON.stringify(store); store.heroText=cleanHT(o); htDraft=null;
+      if(!savePosts()){ store=JSON.parse(prev0); toast("Saqlab bo'lmadi"); return; }
+      rebuildAll(); toast(hs?'Bosh sahifa matni saqlandi':'Standart matn qaytarildi'); return;
+    }
     var rm=e.target.closest('[data-hrm]');
     if(rm){ heroDraft.splice(+rm.getAttribute('data-hrm'),1); drawHeroEditor(); return; }
     var sv=e.target.closest('#hSave'), rs=e.target.closest('#hReset');
@@ -2444,6 +2794,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   /* ---------- Clicks ---------- */
   document.addEventListener('click',function(e){
     if(!e.target.closest('.top-in')) closeNotes(); if(!e.target.closest('.lang')) closeLang(); if(!e.target.closest('.userwrap')) closeUser();
+    var gb0=e.target.closest('[data-gstep]'); if(gb0){ galStep(gb0.closest('.gal'),+gb0.getAttribute('data-gstep')); return; }
     var g=e.target.closest('[data-go]');
     if(g){ go(g.getAttribute('data-go')); return; }
     var t=e.target.closest('[data-toggle]');
@@ -2454,6 +2805,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
       t.firstElementChild.textContent=tr(box.hidden?'Batafsil':'Yopish');
       return;
     }
+    var gb=e.target.closest('[data-gstep]'); if(gb){ galStep(gb.closest('.gal'),+gb.getAttribute('data-gstep')); return; }
     var qa=e.target.closest('[data-qa]');
     if(qa){
       var a=document.getElementById(qa.getAttribute('data-qa'));
@@ -2462,7 +2814,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   });
 
   /* ---------- Start ---------- */
-  applyStatic(); buildLangUI(); fillProfile(); rebuildAll(); renderRating(); renderFaq(); refreshApps(); appNotes(); syncAdminNav();
+  applyStatic(); buildLangUI(); fillProfile(); rebuildAll(); renderRating(); renderFaq(); refreshApps(); appNotes(); syncAdminNav(); xlAll();
   var start='asosiy'; try{ start=location.hash.slice(1)||'asosiy'; }catch(e){}
   show(start);
 })();
