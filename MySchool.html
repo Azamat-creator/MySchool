@@ -952,6 +952,10 @@ window.fmtPhone=function(d){ return '+998 '+d.slice(0,2)+' '+d.slice(2,5)+' '+d.
   };
   var S=G.uz, gate=$('#gate'), cur=null;
   /* Guest mode: browse only (no applying, no own profile/rating, never admin). Lives for this tab only. */
+  /* The ONE admin account. Change it here AND in the Firebase Realtime Database rules (the rules are the real protection). */
+  var ADMIN_EMAIL='myschool33.project@gmail.com';
+  function isAdminUser(u){ return !demo&&!!u&&String(u.email||'').trim().toLowerCase()===ADMIN_EMAIL; }
+  function setAdmin(v){ window.__msAdminFlag=!!v; if(window.__msSetAdmin) window.__msSetAdmin(!!v); }
   var guestMode=false; try{ guestMode=sessionStorage.getItem('myschool-guest')==='1'; }catch(e){}
   function enterGuest(){ cur=null; root.classList.add('authed'); gate.hidden=true; }
   function esc(t){return String(t).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
@@ -1015,10 +1019,17 @@ window.fmtPhone=function(d){ return '+998 '+d.slice(0,2)+' '+d.slice(2,5)+' '+d.
     var done=false; function go(){ if(done) return; done=true; fn(); }
     saveUser(u,p,fresh,false).then(go,go); setTimeout(go,2500);
   }
-  window.__msSyncUser=function(p){ if(cur) saveUser(cur,p,false,true); };
+  window.__msSyncUser=function(p){ if(cur&&!isAdminUser(cur)) saveUser(cur,p,false,true); };
   window.__msGetToken=function(){ return (fb&&fb.currentUser)?fb.currentUser.getIdToken(true).catch(function(){return '';}):Promise.resolve(''); };
   function toInfo(u){ fillInfo(u); root.classList.remove('authed'); gate.hidden=false; showStep('info'); }
   function onUser(u){
+    setAdmin(isAdminUser(u));
+    if(isAdminUser(u)){
+      /* the admin account enters straight away: no name/school/class/phone questions, and it is not listed among students */
+      cur=u; var ap=getProf(u.uid);
+      if(!(ap&&ap.done)){ ap={done:true,name:'Admin',klass:'',school:'',dob:'',phone:'',email:u.email||'',photo:''}; try{ localStorage.setItem('myschool-prof-'+u.uid,JSON.stringify(ap)); }catch(e){} }
+      activate(u,ap); return;
+    }
     if(!u){ cur=null; if(guestMode){ enterGuest(); return; } root.classList.remove('authed'); gate.hidden=false; showStep('start'); return; }
     cur=u; var p=getProf(u.uid);
     if(p&&p.done){ syncThen(u,p,false,function(){ activate(u,p); }); return; }
@@ -1126,7 +1137,7 @@ window.fmtPhone=function(d){ return '+998 '+d.slice(0,2)+' '+d.slice(2,5)+' '+d.
   /* Sign out (user menu in the top bar and the profile page) */
   document.addEventListener('click',function(e){
     if(!e.target.closest('#pfOut,#menuOut,#gmOut')) return;
-    try{ sessionStorage.removeItem('myschool-admin'); sessionStorage.removeItem('myschool-guest'); }catch(x){}
+    try{ sessionStorage.removeItem('myschool-guest'); }catch(x){}
     var r; try{ r=A.out(); }catch(x){}
     Promise.resolve(r).then(function(){ location.reload(); },function(){ location.reload(); });
   });
@@ -1275,6 +1286,9 @@ Telefon raqami|Номер телефона|Phone number|Телефон нөмі�
 Telefon raqami noto'g'ri|Неверный номер телефона|Invalid phone number|Телефон нөмірі қате
 Tug'ilgan sanani to'g'ri kiriting|Введите корректную дату рождения|Enter a valid date of birth|Туған күнді дұрыс енгізіңіз
 Mehmon|Гость|Guest|Қонақ
+Admin hisobi|Аккаунт администратора|Admin account|Әкімші аккаунты
+Admin hisobi bellashuv va tashabbuslarda qatnasha olmaydi, faqat e'lon qila oladi.|Аккаунт администратора не может участвовать в соревнованиях и инициативах, только публиковать их.|The admin account cannot take part in competitions or initiatives, it can only publish them.|Әкімші аккаунты жарыстар мен бастамаларға қатыса алмайды, тек жариялай алады.
+Admin paneliga faqat admin hisobi kira oladi.|В панель администратора может войти только аккаунт администратора.|Only the admin account can open the admin panel.|Әкімші панеліне тек әкімші аккаунты кіре алады.
 Ro'yxatdan o'ting|Зарегистрируйтесь|Please register|Тіркеліңіз
 Chiqish va ro'yxatdan o'tish|Выйти и зарегистрироваться|Log out and register|Шығу және тіркелу
 Mehmon sifatida ariza topshirib bo'lmaydi. Avval tizimdan chiqib, ro'yxatdan o'ting.|Гости не могут подавать заявки. Сначала выйдите и зарегистрируйтесь.|Guests cannot apply. Please log out and register first.|Қонақтар өтінім бере алмайды. Алдымен шығып, тіркеліңіз.
@@ -1394,21 +1408,21 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   }
   buildNav();
 
-  var ADMIN_PASS='myschool2026'; // CHANGE THIS
-  var isAdmin=false; try{ isAdmin=!GUEST&&sessionStorage.getItem('myschool-admin')==='1'; }catch(e){}
-  if(GUEST){ $$('[data-go="admin"]').forEach(function(b){ b.hidden=true; b.style.display='none'; }); }
-  function syncAdminNav(){ var b=$('#nav [data-go="arizalar"]'); if(b) b.hidden=!isAdmin; }
-  function askAdmin(){
-    if(GUEST){ toast(tr("Mehmonlar admin bo'la olmaydi.")); return false; }
-    var pw=window.prompt('Admin parolini kiriting:');
-    if(pw===ADMIN_PASS){ isAdmin=true; try{ sessionStorage.setItem('myschool-admin','1'); }catch(e){} syncAdminNav(); return true; }
-    if(pw!==null) toast("Parol noto'g'ri");
-    return false;
+  /* Admin = the signed-in Google account set in ADMIN_EMAIL (decided in the sign-in script); there is no password. */
+  var isAdmin=!GUEST&&!!window.__msAdminFlag;
+  function syncAdminNav(){
+    var b=$('#nav [data-go="arizalar"]'); if(b) b.hidden=!isAdmin;
+    $$('[data-go="admin"]').forEach(function(x){ x.hidden=!isAdmin; x.style.display=isAdmin?'':'none'; });
   }
+  window.__msSetAdmin=function(v){
+    v=!!v&&!GUEST; if(v===isAdmin) return; isAdmin=v; syncAdminNav();
+    if(!v&&(curView==='admin'||curView==='arizalar')) go('asosiy');
+    if(typeof renderEvents==='function'){ renderEvents(); renderInits(); renderRating(); }
+  };
   function valid(id){return id==='admin'||VIEWS.some(function(v){return v.id===id})}
   function show(id){
     if(!valid(id)) id='asosiy';
-    if((id==='admin'||id==='arizalar')&&!isAdmin&&!askAdmin()){ id='asosiy'; try{ location.hash='asosiy'; }catch(e){} }
+    if((id==='admin'||id==='arizalar')&&!isAdmin){ if(curView!==id&&document.documentElement.classList.contains('authed')) toast(tr("Admin paneliga faqat admin hisobi kira oladi.")); id='asosiy'; try{ location.hash='asosiy'; }catch(e){} }
     $$('[data-view]').forEach(function(s){s.hidden=s.getAttribute('data-view')!==id});
     $$('#nav [data-go],#tabs [data-go]').forEach(function(b){
       if(b.getAttribute('data-go')===id) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current');
@@ -1616,9 +1630,9 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     return a;
   }
   function sameCls(a,b){ return normName(a)===normName(b); }
-  function myK(){ return GUEST?'':profile.klass; }
+  function myK(){ return (GUEST||isAdmin)?'':profile.klass; }
   function findMe(students){
-    if(GUEST) return null;
+    if(GUEST||isAdmin) return null;
     var nm=normName(profile.name), a=students.filter(function(s){return normName(s.name)===nm});
     return a.filter(function(s){return sameCls(s.n,myK())})[0]||(a.length===1?a[0]:null);
   }
@@ -1669,6 +1683,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
         '<div class="st"><b>'+fmtPts(mc.sc)+'</b><span>'+tr('Ball')+'</span></div>'+
         '<div class="st"><b>'+mc.r+'<small>/'+data.classes.length+'</small></b><span>'+tr('Maktabda')+'</span></div></div>';
     }
+    if(isAdmin&&!GUEST) myHtml='';
     if(GUEST) myHtml='<p class="hint-box">'+tr("Mehmon rejimi: reytingda faqat boshqalarning natijalari ko'rinadi. O'z natijangizni ko'rish uchun ro'yxatdan o'ting.")+'</p>';
     $('#myRes').innerHTML=myHtml;
     $('#rankHead').innerHTML=isS?thr(["O'quvchi",'Sinf','Ball'])
@@ -1979,7 +1994,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     }
   });
   $('#aOut').addEventListener('click',function(){
-    isAdmin=false; try{ sessionStorage.removeItem('myschool-admin'); }catch(e){} syncAdminNav(); go('asosiy');
+    go('asosiy');
   });
 
 /* ---------- Applications ---------- */
@@ -2013,7 +2028,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     }).catch(function(){ if(!hasLocal) loadNewsJson(); });
   }
   function publish(){
-    if(!FB.url) return;
+    if(!FB.url||!isAdmin) return;
     if(pubBusy){ pubDirty=true; return; }
     if(!remoteOk){ toast("Firebase'dan ma'lumot yuklanmadi, shuning uchun e'lon qilinmadi. Sahifani yangilab, qayta urining."); return; }
     pubBusy=true;
@@ -2053,18 +2068,12 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
       return ensureToken().then(function(){ return fetch(FB.url+'/applications/'+id+'.json?auth='+token,{method:'PATCH',body:JSON.stringify({status:status})}); }).then(okj);
     }
   };
-  function fbLogin(){
-    var em=window.prompt('Admin email:'), pw=em&&window.prompt('Parol:');
-    if(!pw) return Promise.resolve();
-    return fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='+FB.apiKey,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,password:pw,returnSecureToken:true})})
-      .then(function(r){return r.json()}).then(function(d){ if(d.idToken) token=d.idToken; else toast("Kirib bo'lmadi"); })
-      .catch(function(){ toast("Kirib bo'lmadi"); });
-  }
   var STAT={pending:'Kutilmoqda',approved:'Tasdiqlandi',rejected:'Rad etildi'};
   var myApps=GUEST?{}:lsGet('myschool-myapps'), apEv=null, apKind='event';
   function plain(h){ var d=document.createElement('div'); d.innerHTML=h; return d.textContent; }
   function rid(){ return Array.prototype.map.call(crypto.getRandomValues(new Uint8Array(14)),function(b){return (b%36).toString(36)}).join(''); }
   function applyBtn(e){
+    if(isAdmin) return ''; // the admin account only publishes; it never takes part
     var a=myApps[e.id];
     if(!a) return '<button type="button" class="pill solid" data-apply="'+e.id+'">'+tr('Ariza topshirish')+'</button>';
     return '<span class="stat '+a.status+'">'+tr(STAT[a.status]||STAT.pending)+'</span>';
@@ -2092,7 +2101,9 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   function closeAp(){ $('#apModal').hidden=true; }
   /* Guest dialog: asks the visitor to log out and register first */
   function guestBlock(why){
-    $('#gmMsg').textContent=tr(why==='profile'?"Mehmon profilini o'zgartirib bo'lmaydi. Avval tizimdan chiqib, ro'yxatdan o'ting.":"Mehmon sifatida ariza topshirib bo'lmaydi. Avval tizimdan chiqib, ro'yxatdan o'ting.");
+    var adm=why==='admin';
+    $('#gmT').textContent=tr(adm?'Admin hisobi':"Ro'yxatdan o'ting"); $('#gmOut').hidden=adm;
+    $('#gmMsg').textContent=tr(adm?"Admin hisobi bellashuv va tashabbuslarda qatnasha olmaydi, faqat e'lon qila oladi.":why==='profile'?"Mehmon profilini o'zgartirib bo'lmaydi. Avval tizimdan chiqib, ro'yxatdan o'ting.":"Mehmon sifatida ariza topshirib bo'lmaydi. Avval tizimdan chiqib, ro'yxatdan o'ting.");
     $('#guestModal').hidden=false; $('#gmOut').focus();
   }
   function closeGm(){ $('#guestModal').hidden=true; }
@@ -2101,7 +2112,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeGm(); });
   $('#pfGuestNote').hidden=!GUEST;
   function openApply(kind,id){
-    if(GUEST){ guestBlock('apply'); return; }
+    if(GUEST||isAdmin){ guestBlock(isAdmin?'admin':'apply'); return; }
     apKind=kind; apEv=(kind==='init'?INITS:EVENTS).filter(function(x){return x.id===id})[0]; if(!apEv) return;
     $('#apEv').textContent=plain(apEv.title);
     $('#apName').value=profile.name==='Foydalanuvchi'?'':profile.name; $('#apKlass').value=profile.klass; $('#apPhone').value=profile.phone||''; $('#apNote').value='';
@@ -2113,7 +2124,7 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
   $('#apModal').addEventListener('click',function(e){ if(e.target===this) closeAp(); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeAp(); });
   $('#apSend').addEventListener('click',function(){
-    if(GUEST){ closeAp(); guestBlock('apply'); return; }
+    if(GUEST||isAdmin){ closeAp(); guestBlock(isAdmin?'admin':'apply'); return; }
     var n=$('#apName').value.trim(), k=$('#apKlass').value.trim(), ph=$('#apPhone').value.trim(), btn=this;
     if(!n||!k||!window.uzPhone(ph)){ toast(tr("Ism, sinf va telefonni to'g'ri yozing")); return; } ph=window.fmtPhone(window.uzPhone(ph));
     var a={id:rid(),kind:apKind,evId:apEv.id,evTitle:plain(apEv.title),name:n,klass:k,phone:ph,note:$('#apNote').value.trim(),status:'pending',ts:Date.now()};
