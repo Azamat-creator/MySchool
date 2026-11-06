@@ -945,10 +945,10 @@ window.fmtPhone=function(d){ return '+998 '+d.slice(0,2)+' '+d.slice(2,5)+' '+d.
   var LANGS=[['uz','O‘zbekcha','UZ'],['ru','Русский','RU'],['en','English','EN'],['kk','Қазақша','KZ']];
   var lang='uz'; try{ var sl=localStorage.getItem('myschool-lang'); if(LANGS.some(function(l){return l[0]===sl})) lang=sl; }catch(e){}
   var G={
-    uz:{welcome_t:'Xush kelibsiz!',welcome_p:"MySchool'ga Google hisobingiz orqali kiring. Hisobingizni tanlang, shaxsiy ma'lumotlarni to'ldiring va maktab hayotiga qo'shiling.",start_t:"Kirish va ro'yxatdan o'tish",start_p:'Davom etish uchun Google hisobingizni tanlang.',google:'Google orqali davom etish',need_google:"Ro'yxatdan o'tish va kirish faqat Google hisobi orqali amalga oshadi.",or:'yoki',guest:'Mehmon sifatida davom etish',guest_note:"Mehmonlar faqat ko'rishi mumkin: ariza topshirish, profil va o'z reytingi mavjud emas.",info_t:"Shaxsiy ma'lumotlar",info_p:"Ro'yxatdan o'tishni yakunlash uchun ma'lumotlaringizni to'ldiring.",'switch':'Boshqa hisob',enter:'Saytga kirish',name:'Ism',surname:'Familiya',school:'Maktab',klass:'Sinf (9-A)',dob_l:"Tug'ilgan sana",dob_t:"Tug'ilgan sana *",dob_h:"Kun, oy va yilni tanlang (masalan: 12.03.2010)",phone:'Telefon raqami',fill:"Barcha (*) maydonlarni to'ldiring",baddob:"Tug'ilgan sanani to'g'ri kiriting",badphone:"Telefon raqami noto'g'ri",net:"Tarmoq xatosi. Qayta urinib ko'ring",domain:"Bu sayt manzili Firebase'da ruxsat etilmagan (Authorized domains)",err:"Kirib bo'lmadi. Qayta urinib ko'ring",demo:"Demo rejim: Firebase hali sozlanmagan, hisob tanlash taqlid qilinadi va faqat shu brauzerda ishlaydi.",pick_t:'Hisobni tanlang',pick_other:'Boshqa Google hisob (email)',next:'Davom etish',cancel:'Bekor qilish',bademail:"Email noto'g'ri"},
-    ru:{welcome_t:'Добро пожаловать!',welcome_p:'Войдите в MySchool через аккаунт Google. Выберите аккаунт, заполните личные данные и присоединяйтесь к школьной жизни.',start_t:'Вход и регистрация',start_p:'Выберите аккаунт Google, чтобы продолжить.',google:'Продолжить с Google',need_google:'Регистрация и вход возможны только через аккаунт Google.',or:'или',guest:'Продолжить как гость',guest_note:'Гости могут только смотреть: подача заявок, профиль и личный рейтинг недоступны.',info_t:'Личные данные',info_p:'Заполните данные, чтобы завершить регистрацию.','switch':'Другой аккаунт',enter:'Войти на сайт',name:'Имя',surname:'Фамилия',school:'Школа',klass:'Класс (9-A)',dob_l:'Дата рождения',dob_t:'Дата рождения *',dob_h:'Выберите день, месяц и год (например: 12.03.2010)',phone:'Номер телефона',fill:'Заполните все поля (*)',baddob:'Введите корректную дату рождения',badphone:'Неверный номер телефона',net:'Ошибка сети. Попробуйте ещё раз',domain:'Адрес сайта не добавлен в Authorized domains Firebase',err:'Не удалось войти. Попробуйте ещё раз',demo:'Демо-режим: Firebase ещё не настроен, выбор аккаунта имитируется и работает только в этом браузере.',pick_t:'Выберите аккаунт',pick_other:'Другой аккаунт Google (email)',next:'Далее',cancel:'Отмена',bademail:'Неверный email'},
-    en:{welcome_t:'Welcome!',welcome_p:'Sign in to MySchool with your Google account. Choose an account, fill in your personal details and join school life.',start_t:'Sign in or register',start_p:'Choose your Google account to continue.',google:'Continue with Google',need_google:'Registration and sign-in are only possible with a Google account.',or:'or',guest:'Continue as guest',guest_note:'Guests can only browse: applying, profile and your own rating are not available.',info_t:'Personal information',info_p:'Fill in your details to finish registration.','switch':'Use another account',enter:'Enter the site',name:'First name',surname:'Surname',school:'School',klass:'Class (9-A)',dob_l:'Date of birth',dob_t:'Date of birth *',dob_h:'Pick day, month and year (e.g. 12.03.2010)',phone:'Phone number',fill:'Please fill in all (*) fields',baddob:'Enter a valid date of birth',badphone:'Invalid phone number',net:'Network error. Please try again',domain:'This site address is not in Firebase Authorized domains',err:'Could not sign in. Please try again',demo:'Demo mode: Firebase is not set up yet, account choosing is simulated and only works in this browser.',pick_t:'Choose an account',pick_other:'Another Google account (email)',next:'Next',cancel:'Cancel',bademail:'Invalid email'},
-    kk:{welcome_t:'Қош келдіңіз!',welcome_p:'MySchool-ға Google аккаунтыңыз арқылы кіріңіз. Аккаунтты таңдаңыз, жеке деректеріңізді толтырып, мектеп өміріне қосылыңыз.',start_t:'Кіру және тіркелу',start_p:'Жалғастыру үшін Google аккаунтын таңдаңыз.',google:'Google арқылы жалғастыру',need_google:'Тіркелу және кіру тек Google аккаунты арқылы жүзеге асады.',or:'немесе',guest:'Қонақ ретінде жалғастыру',guest_note:'Қонақтар тек қарай алады: өтінім беру, профиль және жеке рейтинг қолжетімсіз.',info_t:'Жеке деректер',info_p:'Тіркеуді аяқтау үшін деректеріңізді толтырыңыз.','switch':'Басқа аккаунт',enter:'Сайтқа кіру',name:'Аты',surname:'Тегі',school:'Мектеп',klass:'Сынып (9-A)',dob_l:'Туған күні',dob_t:'Туған күні *',dob_h:'Күнін, айын және жылын таңдаңыз (мысалы: 12.03.2010)',phone:'Телефон нөмірі',fill:'Барлық (*) өрістерді толтырыңыз',baddob:'Туған күнді дұрыс енгізіңіз',badphone:'Телефон нөмірі қате',net:'Желі қатесі. Қайталап көріңіз',domain:'Бұл сайт мекенжайы Firebase-тің рұқсат етілген домендер (Authorized domains) тізіміне қосылмаған',err:'Кіру мүмкін болмады. Қайталап көріңіз',demo:'Демо режим: Firebase әлі бапталмаған, аккаунт таңдау тек көрсетілім үшін және тек осы браузерде жұмыс істейді.',pick_t:'Аккаунтты таңдаңыз',pick_other:'Басқа Google аккаунты (email)',next:'Әрі қарай',cancel:'Бас тарту',bademail:'Email қате'}
+    uz:{welcome_t:'Xush kelibsiz!',welcome_p:"MySchool'ga Google hisobingiz orqali kiring. Hisobingizni tanlang, shaxsiy ma'lumotlarni to'ldiring va maktab hayotiga qo'shiling.",start_t:"Kirish va ro'yxatdan o'tish",start_p:'Davom etish uchun Google hisobingizni tanlang.',google:'Google orqali davom etish',need_google:"Ro'yxatdan o'tish va kirish faqat Google hisobi orqali amalga oshadi.",or:'yoki',dupphone:"Bu telefon raqami boshqa hisobda ro'yxatdan o'tgan. Boshqa raqam kiriting",regfail:"Ro'yxatdan o'tib bo'lmadi. Internetni tekshirib, qayta urining",guest:'Mehmon sifatida davom etish',guest_note:"Mehmonlar faqat ko'rishi mumkin: ariza topshirish, profil va o'z reytingi mavjud emas.",info_t:"Shaxsiy ma'lumotlar",info_p:"Ro'yxatdan o'tishni yakunlash uchun ma'lumotlaringizni to'ldiring.",'switch':'Boshqa hisob',enter:'Saytga kirish',name:'Ism',surname:'Familiya',school:'Maktab',klass:'Sinf (9-A)',dob_l:"Tug'ilgan sana",dob_t:"Tug'ilgan sana *",dob_h:"Kun, oy va yilni tanlang (masalan: 12.03.2010)",phone:'Telefon raqami',fill:"Barcha (*) maydonlarni to'ldiring",baddob:"Tug'ilgan sanani to'g'ri kiriting",badphone:"Telefon raqami noto'g'ri",net:"Tarmoq xatosi. Qayta urinib ko'ring",domain:"Bu sayt manzili Firebase'da ruxsat etilmagan (Authorized domains)",err:"Kirib bo'lmadi. Qayta urinib ko'ring",demo:"Demo rejim: Firebase hali sozlanmagan, hisob tanlash taqlid qilinadi va faqat shu brauzerda ishlaydi.",pick_t:'Hisobni tanlang',pick_other:'Boshqa Google hisob (email)',next:'Davom etish',cancel:'Bekor qilish',bademail:"Email noto'g'ri"},
+    ru:{welcome_t:'Добро пожаловать!',welcome_p:'Войдите в MySchool через аккаунт Google. Выберите аккаунт, заполните личные данные и присоединяйтесь к школьной жизни.',start_t:'Вход и регистрация',start_p:'Выберите аккаунт Google, чтобы продолжить.',google:'Продолжить с Google',need_google:'Регистрация и вход возможны только через аккаунт Google.',or:'или',dupphone:'Этот номер телефона уже зарегистрирован на другом аккаунте. Введите другой номер',regfail:'Не удалось завершить регистрацию. Проверьте интернет и попробуйте ещё раз',guest:'Продолжить как гость',guest_note:'Гости могут только смотреть: подача заявок, профиль и личный рейтинг недоступны.',info_t:'Личные данные',info_p:'Заполните данные, чтобы завершить регистрацию.','switch':'Другой аккаунт',enter:'Войти на сайт',name:'Имя',surname:'Фамилия',school:'Школа',klass:'Класс (9-A)',dob_l:'Дата рождения',dob_t:'Дата рождения *',dob_h:'Выберите день, месяц и год (например: 12.03.2010)',phone:'Номер телефона',fill:'Заполните все поля (*)',baddob:'Введите корректную дату рождения',badphone:'Неверный номер телефона',net:'Ошибка сети. Попробуйте ещё раз',domain:'Адрес сайта не добавлен в Authorized domains Firebase',err:'Не удалось войти. Попробуйте ещё раз',demo:'Демо-режим: Firebase ещё не настроен, выбор аккаунта имитируется и работает только в этом браузере.',pick_t:'Выберите аккаунт',pick_other:'Другой аккаунт Google (email)',next:'Далее',cancel:'Отмена',bademail:'Неверный email'},
+    en:{welcome_t:'Welcome!',welcome_p:'Sign in to MySchool with your Google account. Choose an account, fill in your personal details and join school life.',start_t:'Sign in or register',start_p:'Choose your Google account to continue.',google:'Continue with Google',need_google:'Registration and sign-in are only possible with a Google account.',or:'or',dupphone:'This phone number is already registered to another account. Enter a different number',regfail:'Registration failed. Check your connection and try again',guest:'Continue as guest',guest_note:'Guests can only browse: applying, profile and your own rating are not available.',info_t:'Personal information',info_p:'Fill in your details to finish registration.','switch':'Use another account',enter:'Enter the site',name:'First name',surname:'Surname',school:'School',klass:'Class (9-A)',dob_l:'Date of birth',dob_t:'Date of birth *',dob_h:'Pick day, month and year (e.g. 12.03.2010)',phone:'Phone number',fill:'Please fill in all (*) fields',baddob:'Enter a valid date of birth',badphone:'Invalid phone number',net:'Network error. Please try again',domain:'This site address is not in Firebase Authorized domains',err:'Could not sign in. Please try again',demo:'Demo mode: Firebase is not set up yet, account choosing is simulated and only works in this browser.',pick_t:'Choose an account',pick_other:'Another Google account (email)',next:'Next',cancel:'Cancel',bademail:'Invalid email'},
+    kk:{welcome_t:'Қош келдіңіз!',welcome_p:'MySchool-ға Google аккаунтыңыз арқылы кіріңіз. Аккаунтты таңдаңыз, жеке деректеріңізді толтырып, мектеп өміріне қосылыңыз.',start_t:'Кіру және тіркелу',start_p:'Жалғастыру үшін Google аккаунтын таңдаңыз.',google:'Google арқылы жалғастыру',need_google:'Тіркелу және кіру тек Google аккаунты арқылы жүзеге асады.',or:'немесе',dupphone:'Бұл телефон нөмірі басқа аккаунтта тіркелген. Басқа нөмір енгізіңіз',regfail:'Тіркелу мүмкін болмады. Интернетті тексеріп, қайталап көріңіз',guest:'Қонақ ретінде жалғастыру',guest_note:'Қонақтар тек қарай алады: өтінім беру, профиль және жеке рейтинг қолжетімсіз.',info_t:'Жеке деректер',info_p:'Тіркеуді аяқтау үшін деректеріңізді толтырыңыз.','switch':'Басқа аккаунт',enter:'Сайтқа кіру',name:'Аты',surname:'Тегі',school:'Мектеп',klass:'Сынып (9-A)',dob_l:'Туған күні',dob_t:'Туған күні *',dob_h:'Күнін, айын және жылын таңдаңыз (мысалы: 12.03.2010)',phone:'Телефон нөмірі',fill:'Барлық (*) өрістерді толтырыңыз',baddob:'Туған күнді дұрыс енгізіңіз',badphone:'Телефон нөмірі қате',net:'Желі қатесі. Қайталап көріңіз',domain:'Бұл сайт мекенжайы Firebase-тің рұқсат етілген домендер (Authorized domains) тізіміне қосылмаған',err:'Кіру мүмкін болмады. Қайталап көріңіз',demo:'Демо режим: Firebase әлі бапталмаған, аккаунт таңдау тек көрсетілім үшін және тек осы браузерде жұмыс істейді.',pick_t:'Аккаунтты таңдаңыз',pick_other:'Басқа Google аккаунты (email)',next:'Әрі қарай',cancel:'Бас тарту',bademail:'Email қате'}
   };
   var S=G.uz, gate=$('#gate'), cur=null;
   /* Guest mode: browse only (no applying, no own profile/rating, never admin). Lives for this tab only. */
@@ -1007,14 +1007,36 @@ window.fmtPhone=function(d){ return '+998 '+d.slice(0,2)+' '+d.slice(2,5)+' '+d.
   function saveUser(u,p,fresh,edit){
     var r={uid:u.uid,name:p.name||'',klass:p.klass||'',school:p.school||'',dob:p.dob||'',phone:p.phone||'',email:u.email||p.email||'',provider:demo?'demo':'google'};
     if(!edit) r.lastLogin=Date.now(); if(fresh) r.ts=Date.now();
-    if(demo){ try{ var m=JSON.parse(localStorage.getItem('myschool-users'))||{}; m[u.uid]=Object.assign(m[u.uid]||{},r); localStorage.setItem('myschool-users',JSON.stringify(m)); }catch(e){} return Promise.resolve(); }
-    if(!DBU||!fb||!fb.currentUser) return Promise.resolve();
-    return fb.currentUser.getIdToken().then(function(t){ return fetch(DBU+'/users/'+encodeURIComponent(u.uid)+'.json?auth='+t,{method:'PATCH',body:JSON.stringify(r)}).then(function(x){ if(!x.ok) console.warn('MySchool: user not saved (HTTP '+x.status+'). Check Firebase Realtime Database rules.'); }); }).catch(function(e){ console.warn('MySchool: user save failed',e); });
+    if(demo){ try{ var m=JSON.parse(localStorage.getItem('myschool-users'))||{}; m[u.uid]=Object.assign(m[u.uid]||{},r); localStorage.setItem('myschool-users',JSON.stringify(m)); }catch(e){} return Promise.resolve(true); }
+    if(!DBU||!fb||!fb.currentUser) return Promise.resolve(true);
+    return fb.currentUser.getIdToken().then(function(t){ return fetch(DBU+'/users/'+encodeURIComponent(u.uid)+'.json?auth='+t,{method:'PATCH',body:JSON.stringify(r)}).then(function(x){ if(!x.ok) console.warn('MySchool: user not saved (HTTP '+x.status+'). Check Firebase Realtime Database rules.'); return x.ok; }); }).catch(function(e){ console.warn('MySchool: user save failed',e); return false; });
   }
+  /* resolves {ok:true,data:<record or null>}; ok:false means the database could not be reached */
   function remoteGet(u){
-    if(demo||!DBU||!fb||!fb.currentUser) return Promise.resolve(null);
-    return fb.currentUser.getIdToken().then(function(t){ return fetch(DBU+'/users/'+encodeURIComponent(u.uid)+'.json?auth='+t).then(function(r){ return r.ok?r.json():null; }); }).catch(function(){ return null; });
+    if(demo||!DBU||!fb||!fb.currentUser) return Promise.resolve({ok:false,data:null});
+    return fb.currentUser.getIdToken().then(function(t){ return fetch(DBU+'/users/'+encodeURIComponent(u.uid)+'.json?auth='+t).then(function(r){ return r.ok?r.json().then(function(d){ return {ok:true,data:d}; }):{ok:false,data:null}; }); }).catch(function(){ return {ok:false,data:null}; });
   }
+  /* ---- One phone number = one account. /phones/<9 digits> holds the uid that owns the number. ---- */
+  function claimPhone(u,newPh,oldPh){
+    var n=newPh?window.uzPhone(newPh):'', o=oldPh?window.uzPhone(oldPh):'';
+    if(demo||!DBU||!fb||!fb.currentUser) return Promise.resolve('ok');
+    return fb.currentUser.getIdToken().then(function(t){
+      function url(k){ return DBU+'/phones/'+k+'.json?auth='+t; }
+      function getOwner(){ return fetch(url(n)).then(function(r){ if(!r.ok) throw new Error('read'); return r.json(); }); }
+      function release(){ return (o&&o!==n)?fetch(url(o)).then(function(r){ return r.ok?r.json():null; }).then(function(own){ if(own===u.uid) return fetch(url(o),{method:'DELETE'}); }).catch(function(){}):Promise.resolve(); }
+      if(!n) return release().then(function(){ return 'ok'; });
+      return getOwner().then(function(owner){
+        if(owner&&owner!==u.uid) return 'dup';
+        var put=owner===u.uid?Promise.resolve(true):fetch(url(n),{method:'PUT',body:JSON.stringify(u.uid)}).then(function(r){ return r.ok; });
+        return put.then(function(ok){
+          if(ok) return release().then(function(){ return 'ok'; });
+          return getOwner().then(function(ow){ if(ow&&ow!==u.uid) return 'dup'; throw new Error('write'); }); // lost a race, or rules missing
+        });
+      });
+    });
+  }
+  window.__msClaimPhone=function(newPh,oldPh){ return cur&&!isAdminUser(cur)?claimPhone(cur,newPh,oldPh):Promise.resolve('ok'); };
+  function forgetLocal(u){ try{ localStorage.removeItem('myschool-prof-'+u.uid); localStorage.removeItem('myschool-profile'); localStorage.removeItem('myschool-uid'); }catch(e){} }
   function syncThen(u,p,fresh,fn){
     var done=false; function go(){ if(done) return; done=true; fn(); }
     saveUser(u,p,fresh,false).then(go,go); setTimeout(go,2500);
@@ -1032,15 +1054,25 @@ window.fmtPhone=function(d){ return '+998 '+d.slice(0,2)+' '+d.slice(2,5)+' '+d.
     }
     if(!u){ cur=null; if(guestMode){ enterGuest(); return; } root.classList.remove('authed'); gate.hidden=false; showStep('start'); return; }
     cur=u; var p=getProf(u.uid);
-    if(p&&p.done){ syncThen(u,p,false,function(){ activate(u,p); }); return; }
-    /* new device: restore the profile saved for this Google account, otherwise ask for the personal info */
-    remoteGet(u).then(function(r){
+    if(demo||!DBU||!fb||!fb.currentUser){
+      if(p&&p.done) syncThen(u,p,false,function(){ activate(u,p); }); else toInfo(u);
+      return;
+    }
+    /* Firebase is the source of truth: if the admin deleted this account (no record), the person must register again */
+    remoteGet(u).then(function(res){
       if(cur!==u) return;
-      if(r&&r.name&&r.klass){
-        var q={done:true,name:r.name,klass:r.klass,school:r.school||'',dob:r.dob||'',phone:r.phone||'',email:u.email||'',photo:''};
-        try{ localStorage.setItem('myschool-prof-'+u.uid,JSON.stringify(q)); }catch(e){}
-        syncThen(u,q,false,function(){ activate(u,q); });
-      }else toInfo(u);
+      if(!res.ok){ if(p&&p.done) activate(u,p); else toInfo(u); return; } // database unreachable: keep working from the local copy
+      var r=res.data;
+      if(!(r&&r.name&&r.klass)){ forgetLocal(u); toInfo(u); return; }
+      var q=(p&&p.done)?p:{done:true,name:r.name,klass:r.klass,school:r.school||'',dob:r.dob||'',phone:r.phone||'',email:u.email||'',photo:''};
+      if(!(p&&p.done)){ try{ localStorage.setItem('myschool-prof-'+u.uid,JSON.stringify(q)); }catch(e){} }
+      var go=function(){ syncThen(u,q,false,function(){ activate(u,q); }); };
+      if(!q.phone){ go(); return; }
+      claimPhone(u,q.phone,null).then(function(st){
+        if(cur!==u) return;
+        if(st==='dup'){ forgetLocal(u); toInfo(u); msg('gMsg2',S.dupphone); return; } // someone else already owns this number
+        go();
+      },go);
     });
   }
 
@@ -1130,8 +1162,16 @@ window.fmtPhone=function(d){ return '+998 '+d.slice(0,2)+' '+d.slice(2,5)+' '+d.
     var dt=new Date(d.dob); if(isNaN(dt)||dt>new Date()||dt.getFullYear()<1980){ msg('gMsg2',S.baddob); return; }
     var ph9=window.uzPhone(d.phone); if(!ph9){ msg('gMsg2',S.badphone); $('#uPhone').setAttribute('aria-invalid','true'); return; } d.phone=window.fmtPhone(ph9);
     var p={done:true,name:d.name+' '+d.surname,klass:d.klass,school:d.school,dob:d.dob.split('-').reverse().join('.'),phone:d.phone,email:cur.email||'',photo:''};
-    try{ localStorage.setItem('myschool-prof-'+cur.uid,JSON.stringify(p)); localStorage.removeItem('myschool-uid'); }catch(e){}
-    var u=cur; syncThen(u,p,true,function(){ activate(u,p); });
+    var u=cur, btn=$('#fInfo button[type=submit]'); btn.disabled=true; msg('gMsg2','');
+    function fail(t){ btn.disabled=false; msg('gMsg2',t); }
+    claimPhone(u,d.phone,null).then(function(st){
+      if(st==='dup'){ fail(S.dupphone); return; }
+      return Promise.race([saveUser(u,p,true,false),new Promise(function(res){ setTimeout(function(){ res(false); },10000); })]).then(function(ok){
+        if(!ok){ fail(S.regfail); return; }
+        try{ localStorage.setItem('myschool-prof-'+u.uid,JSON.stringify(p)); localStorage.removeItem('myschool-uid'); }catch(e){}
+        btn.disabled=false; activate(u,p);
+      });
+    }).catch(function(){ fail(S.regfail); });
   });
 
   /* Sign out (user menu in the top bar and the profile page) */
@@ -1286,6 +1326,8 @@ Telefon raqami|Номер телефона|Phone number|Телефон нөмі�
 Telefon raqami noto'g'ri|Неверный номер телефона|Invalid phone number|Телефон нөмірі қате
 Tug'ilgan sanani to'g'ri kiriting|Введите корректную дату рождения|Enter a valid date of birth|Туған күнді дұрыс енгізіңіз
 Mehmon|Гость|Guest|Қонақ
+Bu telefon raqami boshqa hisobda ro'yxatdan o'tgan.|Этот номер телефона уже зарегистрирован на другом аккаунте.|This phone number is already registered to another account.|Бұл телефон нөмірі басқа аккаунтта тіркелген.
+Telefon raqamini tekshirib bo'lmadi. Qayta urinib ko'ring.|Не удалось проверить номер телефона. Попробуйте ещё раз.|Could not check the phone number. Please try again.|Телефон нөмірін тексеру мүмкін болмады. Қайталап көріңіз.
 Admin hisobi|Аккаунт администратора|Admin account|Әкімші аккаунты
 Admin hisobi bellashuv va tashabbuslarda qatnasha olmaydi, faqat e'lon qila oladi.|Аккаунт администратора не может участвовать в соревнованиях и инициативах, только публиковать их.|The admin account cannot take part in competitions or initiatives, it can only publish them.|Әкімші аккаунты жарыстар мен бастамаларға қатыса алмайды, тек жариялай алады.
 Admin paneliga faqat admin hisobi kira oladi.|В панель администратора может войти только аккаунт администратора.|Only the admin account can open the admin panel.|Әкімші панеліне тек әкімші аккаунты кіре алады.
@@ -1764,11 +1806,21 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     var nm=$('#in-name').value.trim().replace(/\s+/g,' '), kl=$('#in-klass').value.trim(), sc=$('#in-school').value.trim(), dv=$('#in-dob').value, ph=$('#in-phone').value.trim();
     if(ph){ var p9=window.uzPhone(ph); if(!p9){ toast(tr("Telefon raqami noto'g'ri")); return; } ph=window.fmtPhone(p9); }
     if(dv&&(isNaN(new Date(dv))||new Date(dv)>new Date())){ toast(tr("Tug'ilgan sanani to'g'ri kiriting")); return; }
-    var prev=JSON.stringify(profile);
-    if(nm) profile.name=nm; if(kl) profile.klass=kl; if(sc) profile.school=sc; if(dv) profile.dob=dv.split('-').reverse().join('.');
-    profile.phone=ph; if(pendPhoto!==null) profile.photo=pendPhoto;
-    if(!persistProfile()){ profile=JSON.parse(prev); toast(tr('Rasm juda katta. Kichikroq rasm tanlang.')); return; }
-    pendPhoto=null; fillProfile(); renderRating(); setEditing(false); toast(tr("Ma'lumotlar saqlandi"));
+    function commit(){
+      var prev=JSON.stringify(profile);
+      if(nm) profile.name=nm; if(kl) profile.klass=kl; if(sc) profile.school=sc; if(dv) profile.dob=dv.split('-').reverse().join('.');
+      profile.phone=ph; if(pendPhoto!==null) profile.photo=pendPhoto;
+      if(!persistProfile()){ profile=JSON.parse(prev); toast(tr('Rasm juda katta. Kichikroq rasm tanlang.')); return; }
+      pendPhoto=null; fillProfile(); renderRating(); setEditing(false); toast(tr("Ma'lumotlar saqlandi"));
+    }
+    if(ph!==profile.phone&&window.__msClaimPhone&&!isAdmin){
+      window.__msClaimPhone(ph,profile.phone).then(function(st){
+        if(st==='dup'){ toast(tr("Bu telefon raqami boshqa hisobda ro'yxatdan o'tgan.")); return; }
+        commit();
+      },function(){ toast(tr("Telefon raqamini tekshirib bo'lmadi. Qayta urinib ko'ring.")); });
+      return;
+    }
+    commit();
   });
   $('#pfCancel').addEventListener('click',function(){ pendPhoto=null; fillProfile(); setEditing(false); });
   $('#pfPhoto').addEventListener('change',function(){
@@ -2289,7 +2341,8 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
       '<span class="date">Tug\'ilgan sana: '+esc(u.dob||'—')+'</span>'+
       '<span class="date">Telefon: '+esc(u.phone||'—')+'</span>'+
       '<span class="date">Google email: '+esc(u.email||'—')+'</span>'+
-      '<span class="date">Ro\'yxatdan o\'tgan: '+fmtTs(u.ts)+' · Oxirgi kirish: '+fmtTs(u.lastLogin)+'</span></div></div>';
+      '<span class="date">Ro\'yxatdan o\'tgan: '+fmtTs(u.ts)+' · Oxirgi kirish: '+fmtTs(u.lastLogin)+'</span></div>'+
+      (FB.url&&u.uid?'<div class="act"><button type="button" class="pill" data-udel="'+esc(u.uid)+'">O\'chirish</button></div>':'')+'</div>';
   }
   function renderUsers(){
     var l=$('#aList'), note=FB.url?'':'<p class="hint">Demo rejim: foydalanuvchilar faqat shu brauzerda ko\'rinadi. Hammasini ko\'rish uchun Firebase ulang.</p>';
@@ -2313,7 +2366,23 @@ Rasm juda katta. Kichikroq rasm tanlang.|Фото слишком большое.
     if(cur!=='users') return;
     if(e.target.closest('[data-ulogin]')){ renderUsers(); return; }
     if(e.target.closest('#uExport')) exportUsers();
+    var d=e.target.closest('[data-udel]'); if(d) deleteUser(d.getAttribute('data-udel'));
   });
+  /* Deleting an account removes its record and frees its phone number; the person must register again at their next login. */
+  function deleteUser(uid){
+    var rec=usersCache.filter(function(x){return x.uid===uid})[0]||{};
+    if(!window.confirm((rec.name||rec.email||'Bu foydalanuvchi')+" hisobi o'chirilsinmi?\nU keyingi kirishda qaytadan ro'yxatdan o'tishi kerak bo'ladi.")) return;
+    ensureToken().then(function(t){
+      if(!t) throw new Error('auth');
+      var ph=window.uzPhone(rec.phone||'');
+      return fetch(FB.url+'/users/'+encodeURIComponent(uid)+'.json?auth='+t,{method:'DELETE'}).then(okj).then(function(){
+        if(!ph) return;
+        var pu=FB.url+'/phones/'+ph+'.json?auth='+t;
+        return fetch(pu).then(function(r){ return r.ok?r.json():null; }).then(function(own){ if(own===uid) return fetch(pu,{method:'DELETE'}); });
+      });
+    }).then(function(){ toast("Hisob o'chirildi"); renderUsers(); })
+      .catch(function(){ toast("O'chirib bo'lmadi. Firebase qoidalarini tekshiring."); });
+  }
 
 /* ---------- Admin: main page pictures (slideshow, up to 5) ---------- */
   var heroDraft=[], heroTimer=null, heroIdx=0, HERO_MAX=5;
